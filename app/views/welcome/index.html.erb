@@ -7,7 +7,7 @@
         <li><%= link_to 'Do a quiz', 'quizzes' %></li>
         <li><%= link_to 'Create new questions', 'questions' %></li>
         <li><%= link_to 'Manage activities', 'activities' %></li>
-        <li><%= link_to 'Add a new cohort', cohorts_path %></li>
+        <li><%= link_to 'Add a new cohort', cohorts_path %> (<%= @welcome[:cohorts_count] %>)</li>
       </ul>
     </div>
   </div>
