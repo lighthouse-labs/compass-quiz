@@ -11,20 +11,20 @@ class CreateTables < ActiveRecord::Migration
     end
     create_table :quizzes do |t|
       t.string :day
-      t.references :cohort
+      t.references :cohort, index: true
       t.timestamps null: false
     end
     add_foreign_key :quizzes, :cohorts
     create_table :questions do |t|
       t.text :question
       t.boolean :active, default: true
-      t.references :activity
+      t.references :activity, index: true
       t.timestamps null: false
     end
     add_foreign_key :questions, :activities
     create_table :question_quizzes do |t|
-      t.references :question
-      t.references :quiz
+      t.references :question, index: true
+      t.references :quiz, index: true
       t.timestamps null: false
     end
     add_foreign_key :question_quizzes, :questions
@@ -33,26 +33,26 @@ class CreateTables < ActiveRecord::Migration
       t.text :answer
       t.text :explanation
       t.boolean :correct
-      t.references :question
+      t.references :question, index: true
       t.timestamps null: false
     end
     add_foreign_key :options, :questions
     create_table :students do |t|
       t.string :github_username
-      t.references :cohort
+      t.references :cohort, index: true
       t.timestamps null: false
     end
     add_foreign_key :students, :cohorts
     create_table :submissions do |t|
-      t.references :quiz
-      t.references :student
+      t.references :quiz, index: true
+      t.references :student, index: true
       t.timestamps null: false
     end
     add_foreign_key :submissions, :quizzes
     add_foreign_key :submissions, :students
     create_table :answers do |t|
-      t.references :option
-      t.references :submission
+      t.references :option, index: true
+      t.references :submission, index: true
       t.timestamps null: false
     end
     add_foreign_key :answers, :options

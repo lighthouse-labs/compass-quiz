@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105020037) do
+ActiveRecord::Schema.define(version: 20160105030608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "compass_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -30,10 +31,14 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.datetime "updated_at",    null: false
   end
 
+  add_index "answers", ["option_id"], name: "index_answers_on_option_id", using: :btree
+  add_index "answers", ["submission_id"], name: "index_answers_on_submission_id", using: :btree
+
   create_table "cohorts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "compass_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -45,12 +50,17 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "options", ["question_id"], name: "index_options_on_question_id", using: :btree
+
   create_table "question_quizzes", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "quiz_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "question_quizzes", ["question_id"], name: "index_question_quizzes_on_question_id", using: :btree
+  add_index "question_quizzes", ["quiz_id"], name: "index_question_quizzes_on_quiz_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.text     "question"
@@ -60,6 +70,8 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "questions", ["activity_id"], name: "index_questions_on_activity_id", using: :btree
+
   create_table "quizzes", force: :cascade do |t|
     t.string   "day"
     t.integer  "cohort_id"
@@ -67,12 +79,17 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "quizzes", ["cohort_id"], name: "index_quizzes_on_cohort_id", using: :btree
+
   create_table "students", force: :cascade do |t|
     t.string   "github_username"
     t.integer  "cohort_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "compass_id"
   end
+
+  add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
 
   create_table "submissions", force: :cascade do |t|
     t.integer  "quiz_id"
@@ -80,6 +97,9 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "submissions", ["quiz_id"], name: "index_submissions_on_quiz_id", using: :btree
+  add_index "submissions", ["student_id"], name: "index_submissions_on_student_id", using: :btree
 
   add_foreign_key "answers", "options"
   add_foreign_key "answers", "submissions"
