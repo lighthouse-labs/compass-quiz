@@ -1,0 +1,37 @@
+@import 'foundation_and_overrides';
+@import 'foundation-icons';
+
+body > footer {
+  background-color: $vapor;
+  color: $steel;
+  min-height: 15rem;
+  padding: 4rem 0;
+}
+
+main {
+  min-height: 70%;
+}
+
+.actions {
+  @extend .text-right;
+}
+
+.item {
+  padding: .5rem 0;
+}
+
+.item-details {
+  background-color: $vapor;
+  font-size: 80%;
+  margin: .25rem 0;
+  padding: .25rem .5rem;
+}
+
+.item-name {
+  font-weight: $font-weight-bold;
+}
+
+.page-content {
+  margin: 4rem 0;
+}
+

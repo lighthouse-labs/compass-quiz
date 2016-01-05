@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20160105030608) do
     t.integer  "cohort_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.string   "compass_install"
     t.integer  "compass_primary_key"
   end
 

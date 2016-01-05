@@ -1,14 +1,31 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>CompassQuiz</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title><%= content_for?(:title) ? yield(:title) : 'Compass Quiz' %></title>
+<%= stylesheet_link_tag 'application' %>
+<%= javascript_include_tag 'vendor/modernizr' %>
+<%= javascript_include_tag 'application' %>
+<%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/"><i class="fi-compass"></i> Compass Quiz</a></h1>
+    </li>
+  </ul>
+</nav>
+<main>
+<%= yield -%>
+</main>
+<footer>
+  <div class="row">
+    <div class="medium-centered medium-10 columns">
+      <p class="text-center">&copy; Lighthouse Labs</p>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
