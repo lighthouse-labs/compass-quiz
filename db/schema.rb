@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160105020037) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activities", force: :cascade do |t|
     t.string   "day"
     t.string   "title"
@@ -78,4 +81,14 @@ ActiveRecord::Schema.define(version: 20160105020037) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "answers", "options"
+  add_foreign_key "answers", "submissions"
+  add_foreign_key "options", "questions"
+  add_foreign_key "question_quizzes", "questions"
+  add_foreign_key "question_quizzes", "quizzes"
+  add_foreign_key "questions", "activities"
+  add_foreign_key "quizzes", "cohorts"
+  add_foreign_key "students", "cohorts"
+  add_foreign_key "submissions", "quizzes"
+  add_foreign_key "submissions", "students"
 end
