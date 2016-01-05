@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20160105030608) do
   create_table "activities", force: :cascade do |t|
     t.string   "day"
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "compass_install"
     t.integer  "compass_id"
   end
 
@@ -36,8 +37,9 @@ ActiveRecord::Schema.define(version: 20160105030608) do
 
   create_table "cohorts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "compass_install"
     t.integer  "compass_id"
   end
 
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160105030608) do
     t.integer  "cohort_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "compass_install"
     t.integer  "compass_id"
   end
 
