@@ -5,26 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title><%= content_for?(:title) ? yield(:title) : 'Compass Quiz' %></title>
 <%= stylesheet_link_tag 'application' %>
-<%= javascript_include_tag 'vendor/modernizr' %>
 <%= javascript_include_tag 'application' %>
 <%= csrf_meta_tags %>
 </head>
 <body>
-<nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="/"><i class="fi-compass"></i> Compass Quiz</a></h1>
-    </li>
-  </ul>
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand"><i class="fa fa-compass"></i> Compass Quiz</a>
+    </div>
+  </div>
 </nav>
 <main>
-<%= yield -%>
+  <%= yield -%>
 </main>
 <footer>
-  <div class="row">
-    <div class="medium-centered medium-10 columns">
-      <p class="text-center">&copy; Lighthouse Labs</p>
-    </div>
+  <div class="container">
+    <p class="text-center">&copy; Lighthouse Labs</p>
   </div>
 </footer>
 </body>

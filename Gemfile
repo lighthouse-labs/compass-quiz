@@ -5,8 +5,8 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'sass-rails', '~> 5.0'
-gem 'foundation-rails'
-gem 'foundation-icons-sass-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'byebug'

@@ -1,0 +1,27 @@
+$body-bg: #f5f5f5;
+$border-radius-base: 0;
+$navbar-inverse-bg: #34495E;
+$navbar-inverse-color: #fff;
+$navbar-inverse-link-color: #fff;
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+body > footer {
+  background-color: $gray-lighter;
+  color: $gray;
+  min-height: 15rem;
+  padding: 4rem 0;
+}
+
+main {
+  min-height: 80rem;
+}
+
+.page-content {
+  background: #fff;
+  padding: 4rem 4rem 16rem;
+}
+
