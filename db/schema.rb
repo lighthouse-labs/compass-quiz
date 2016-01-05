@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 20160105030608) do
   create_table "activities", force: :cascade do |t|
     t.string   "day"
     t.string   "title"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "compass_install"
-    t.integer  "compass_id"
+    t.integer  "compass_primary_key"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 20160105030608) do
 
   create_table "cohorts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "compass_install"
-    t.integer  "compass_id"
+    t.integer  "compass_primary_key"
   end
 
   create_table "options", force: :cascade do |t|
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 20160105030608) do
   create_table "students", force: :cascade do |t|
     t.string   "github_username"
     t.integer  "cohort_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "compass_install"
-    t.integer  "compass_id"
+    t.integer  "compass_primary_key"
   end
 
   add_index "students", ["cohort_id"], name: "index_students_on_cohort_id", using: :btree
