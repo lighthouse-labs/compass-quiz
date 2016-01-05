@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <header>
-          <h1>Cohorts</h1>
+          <h1>Activities</h1>
         </header>
         <% if notice %>
           <div data-alert class="alert alert-success alert-dismissable" role="alert">
@@ -13,24 +13,24 @@
         <% end %>
         <div class="row">
           <section class="col-lg-6">
-            <h2 class="hide">All cohorts</h2>
-            <% if @cohorts.empty? %>
+            <h2 class="hide">All activities</h2>
+            <% if @activities.empty? %>
               <div class="alert alert-info">
-                There are currently no cohorts in the system.
+                There are currently no activities in the system.
               </div>
             <% else %>
-              <% @cohorts.each do |cohort| %>
+              <% @activities.each do |activity| %>
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <%= cohort.name %>
-                    <%= link_to 'delete', cohort, method: :delete, class: 'text-danger pull-right', data: {confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?"} %>
+                    <b><%= activity.day %></b> <%= activity.title %>
+                    <%= link_to 'delete', activity, method: :delete, class: 'text-danger pull-right', data: {confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?"} %>
                   </div>
                   <div class="panel-body">
                     <dl class="dl-horizontal">
                       <dt>Compass install</dt>
-                      <dd><%= cohort.compass_install %></dd>
+                      <dd><%= activity.compass_install %></dd>
                       <dt>Compass primary key</dt>
-                      <dd><%= cohort.compass_primary_key %></dd>
+                      <dd><%= activity.compass_primary_key %></dd>
                     </dl>
                   </div>
                 </div>
@@ -38,24 +38,30 @@
             <% end %>
           </section>
           <aside class="col-lg-6">
-            <%= form_for @cohort, html: {class: 'form-horizontal'} do |f| %>
+            <%= form_for @activity, html: {class: 'form-horizontal'} do |f| %>
               <div class="panel panel-primary">
-                <div class="panel-heading">Add a cohort</div>
+                <div class="panel-heading">Add an activity</div>
                 <div class="panel-body">
-                  <% if @cohort.errors.any? %>
+                  <% if @activity.errors.any? %>
                     <div class="alert alert-warning">
-                      <p><%= pluralize(@cohort.errors.count, 'error') %> prohibited this cohort from being saved:</p>
+                      <p><%= pluralize(@activity.errors.count, 'error') %> prohibited this activity from being saved:</p>
                       <ul>
-                        <% @cohort.errors.full_messages.each do |message| %>
+                        <% @activity.errors.full_messages.each do |message| %>
                           <li><%= message %></li>
                         <% end %>
                       </ul>
                     </div>
                   <% end %>
                   <div class="form-group">
-                    <%= f.label :name, class: 'control-label col-sm-6' %>
+                    <%= f.label :title, class: 'control-label col-sm-6' %>
                     <div class="col-sm-6">
-                      <%= f.text_field :name, class: 'form-control' %>
+                      <%= f.text_field :title, class: 'form-control' %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <%= f.label :day, class: 'control-label col-sm-6' %>
+                    <div class="col-sm-6">
+                      <%= f.text_field :day, class: 'form-control' %>
                     </div>
                   </div>
                   <div class="form-group">

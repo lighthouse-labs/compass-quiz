@@ -6,7 +6,7 @@ class Cohort < ActiveRecord::Base
 
   validates :compass_install, presence: true
 
-  validates :compass_primary_key, presence: true, numericality: { greater_than: 0, only_integer: true }
+  validates :compass_primary_key, numericality: { greater_than: 0, only_integer: true }
 
   validates :name, presence: true
 
