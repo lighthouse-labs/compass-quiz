@@ -1,0 +1,17 @@
+.container
+  article.page-content
+    .row
+      .col-lg-6.col-lg-offset-3
+        h1 Build and deliver quizzes
+        p.lead Choose a management option
+        ul
+          li
+            = link_to 'Do a quiz', 'quizzes'
+          li
+            = link_to 'Create new questions', 'questions'
+          li
+            = link_to 'Manage activities', activities_path
+            = " (#{@welcome[:activities_count]})"
+          li
+            = link_to 'Add a new cohort', cohorts_path
+            = " (#{@welcome[:cohorts_count]})"

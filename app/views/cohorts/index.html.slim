@@ -1,0 +1,48 @@
+.container
+  article.page-content
+    .row
+      .col-lg-10.col-lg-offset-1
+        header
+          h1 Cohorts
+        - if notice
+          .alert.alert-success.alert-dismissable role="alert"
+            = notice
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+        .row
+          .col-lg-6
+            - if @cohorts.empty?
+              .alert.alert-info There are currently no cohorts in the system.
+            - else
+              - @cohorts.each do |cohort|
+                .panel.panel-default
+                  .panel-heading
+                    = cohort.name
+                    = link_to 'delete', cohort, method: :delete, class: 'text-danger pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" }
+                  .panel-body
+                    dl.dl-horizontal
+                      dt Compass install
+                      dd = cohort.compass_install
+                      dt Compass primary key
+                      dd = cohort.compass_primary_key
+          .col-lg-6
+            = form_for @cohort, html: { class: 'form-horizontal' } do |f|
+              .panel.panel-primary
+                .panel-heading Add a cohort
+                .panel-body
+                  - if @cohort.errors.any?
+                    .alert.alert-warning
+                      p = "#{pluralize(@cohort.errors.count, 'error')} prohibited this cohort from being saved."
+                      ul
+                        - @cohort.errors.full_messages.each do |message|
+                          li = message
+                  .form-group
+                    = f.label :name, class: 'control-label col-sm-6'
+                    .col-sm-6 = f.text_field :name, class: 'form-control'
+                  .form-group
+                    = f.label :compass_install, class: 'control-label col-sm-6'
+                    .col-sm-6 = f.text_field :compass_install, class: 'form-control'
+                  .form-group
+                    = f.label :compass_primary_key, class: 'control-label col-sm-6'
+                    .col-sm-6 = f.text_field :compass_primary_key, class: 'form-control'
+                .panel-footer.clearfix = f.submit class: 'btn btn-primary pull-right'
