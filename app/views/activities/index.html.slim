@@ -16,6 +16,10 @@
                 = " #{activity.title}"
               .panel-body
                 dl.dl-horizontal
+                  dt Number of questions
+                  dd
+                    b = "#{activity.questions.count} "
+                    = link_to '(new question)', new_question_path(activity_id: activity.id)
                   dt Compass install
                   dd = activity.compass_install
                   dt Compass primary key

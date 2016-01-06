@@ -15,17 +15,17 @@
         h3
           b = @question.activity.day
           = " #{@question.activity.title}"
-        .well
+        .well.well-sm
           = markdown(@question.question)
       .col-md-6
         h2 Options
         - @question.options.each_with_index do |option, index|
+          - if option.correct?
+            span.label.label-success.pull-right correct answer
           h3
             = "Option #{index + 1} "
-            - if option.correct?
-              span.label.label-success correct answer
-          .well
+          .well.well-sm
             = markdown(option.answer)
           h4 Explanation
-          .well
+          .well.well-sm
             = markdown(option.explanation)

@@ -8,7 +8,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'slim-rails'
-gem 'redcarpet'
+gem 'rdiscount'
 
 group :development, :test do
   gem 'byebug'

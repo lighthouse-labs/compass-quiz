@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @question.activity_id = params[:activity_id] if params[:activity_id]
     @question.options << Option.new
   end
 
