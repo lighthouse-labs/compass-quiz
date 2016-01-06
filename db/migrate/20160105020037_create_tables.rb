@@ -22,13 +22,13 @@ class CreateTables < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_foreign_key :questions, :activities
-    create_table :question_quizzes do |t|
+    create_table :questions_quizzes do |t|
       t.references :question, index: true
       t.references :quiz, index: true
       t.timestamps null: false
     end
-    add_foreign_key :question_quizzes, :questions
-    add_foreign_key :question_quizzes, :quizzes
+    add_foreign_key :questions_quizzes, :questions
+    add_foreign_key :questions_quizzes, :quizzes
     create_table :options do |t|
       t.text :answer
       t.text :explanation

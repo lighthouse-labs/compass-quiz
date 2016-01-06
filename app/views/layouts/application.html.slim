@@ -16,6 +16,12 @@ html
             i.fa.fa-compass
             = ' Compass Quiz'
     main
+      - if notice
+        .container
+          .alert.alert-success.alert-dismissable role="alert"
+            = notice
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
       == yield
     footer
       .container

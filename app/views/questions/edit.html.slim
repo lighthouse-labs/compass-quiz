@@ -1,0 +1,12 @@
+.container
+  article.page-content
+    header
+      h1
+        = "Edit question #{@question.id} "
+      p
+        = link_to 'Back', questions_path
+        = ' | '
+        = link_to 'View', question_path
+        = ' | '
+        = link_to 'Delete', @question, method: :delete, class: 'text-danger', data: {confirm: "Are you sure you want to delete question #{@question.id}?"}
+    = render 'form'

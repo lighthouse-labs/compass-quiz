@@ -54,16 +54,6 @@ ActiveRecord::Schema.define(version: 20160105030608) do
 
   add_index "options", ["question_id"], name: "index_options_on_question_id", using: :btree
 
-  create_table "question_quizzes", force: :cascade do |t|
-    t.integer  "question_id"
-    t.integer  "quiz_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "question_quizzes", ["question_id"], name: "index_question_quizzes_on_question_id", using: :btree
-  add_index "question_quizzes", ["quiz_id"], name: "index_question_quizzes_on_quiz_id", using: :btree
-
   create_table "questions", force: :cascade do |t|
     t.text     "question"
     t.boolean  "active",      default: true
@@ -73,6 +63,16 @@ ActiveRecord::Schema.define(version: 20160105030608) do
   end
 
   add_index "questions", ["activity_id"], name: "index_questions_on_activity_id", using: :btree
+
+  create_table "questions_quizzes", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "quiz_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "questions_quizzes", ["question_id"], name: "index_questions_quizzes_on_question_id", using: :btree
+  add_index "questions_quizzes", ["quiz_id"], name: "index_questions_quizzes_on_quiz_id", using: :btree
 
   create_table "quizzes", force: :cascade do |t|
     t.string   "day"
@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 20160105030608) do
   add_foreign_key "answers", "options"
   add_foreign_key "answers", "submissions"
   add_foreign_key "options", "questions"
-  add_foreign_key "question_quizzes", "questions"
-  add_foreign_key "question_quizzes", "quizzes"
   add_foreign_key "questions", "activities"
+  add_foreign_key "questions_quizzes", "questions"
+  add_foreign_key "questions_quizzes", "quizzes"
   add_foreign_key "quizzes", "cohorts"
   add_foreign_key "students", "cohorts"
   add_foreign_key "submissions", "quizzes"

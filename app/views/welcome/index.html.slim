@@ -1,17 +1,21 @@
 .container
   article.page-content
+    header
+      h1 Build and deliver quizzes
     .row
-      .col-lg-6.col-lg-offset-3
-        h1 Build and deliver quizzes
-        p.lead Choose a management option
-        ul
-          li
-            = link_to 'Do a quiz', 'quizzes'
-          li
-            = link_to 'Create new questions', 'questions'
-          li
-            = link_to 'Manage activities', activities_path
-            = " (#{@welcome[:activities_count]})"
-          li
-            = link_to 'Add a new cohort', cohorts_path
-            = " (#{@welcome[:cohorts_count]})"
+      .col-md-4
+        p.lead Choose a management option:
+        .list-group
+          = link_to 'questions', class: 'list-group-item' do
+            | Questions
+            span.badge = @welcome[:questions_count]
+          = link_to activities_path, class: 'list-group-item' do
+            | Activities
+            span.badge = @welcome[:activities_count]
+          = link_to cohorts_path, class: 'list-group-item' do
+            | Cohorts
+            span.badge = @welcome[:cohorts_count]
+      .col-md-5.col-md-push-1
+        p.lead Or&hellip;
+        p
+          = link_to 'Do a Quiz', 'quizzes', class: 'btn btn-primary btn-lg'

@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
 
-  has_many :questions
+  has_many :questions, dependent: :nullify
 
   validates :compass_install, presence: true
 
@@ -10,6 +10,6 @@ class Activity < ActiveRecord::Base
 
   validates :day, presence: true
 
-  default_scope { order('compass_install, day, title') }
+  default_scope { order(:compass_install, :day, :title) }
 
 end

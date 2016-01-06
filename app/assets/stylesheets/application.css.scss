@@ -1,5 +1,7 @@
 $body-bg: #f5f5f5;
 $border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
 $navbar-inverse-bg: #34495E;
 $navbar-inverse-color: #fff;
 $navbar-inverse-link-color: #fff;
@@ -8,6 +10,10 @@ $navbar-inverse-link-color: #fff;
 @import 'bootstrap';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+article > header {
+  margin-bottom: 4rem;
+}
 
 body > footer {
   background-color: $gray-lighter;
@@ -21,8 +27,22 @@ main {
   min-height: 80rem;
 }
 
+select.form-control {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
 .page-content {
   background: #fff;
   padding: 4rem 4rem 16rem;
 }
 
+.question-option {
+  border-bottom: 1px solid $gray-lighter;
+  margin-bottom: 2em;
+}

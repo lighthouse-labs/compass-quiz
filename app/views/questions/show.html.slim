@@ -1,0 +1,31 @@
+.container
+  article.page-content
+    header
+      h1
+        = "Question #{@question.id} "
+      p
+        = link_to 'Back', questions_path
+        = ' | '
+        = link_to 'Edit', edit_question_path
+        = ' | '
+        = link_to 'Delete', @question, method: :delete, class: 'text-danger', data: {confirm: "Are you sure you want to delete question #{@question.id}?"}
+    .row
+      .col-md-6
+        h2 Question
+        h3
+          b = @question.activity.day
+          = " #{@question.activity.title}"
+        .well
+          = markdown(@question.question)
+      .col-md-6
+        h2 Options
+        - @question.options.each_with_index do |option, index|
+          h3
+            = "Option #{index + 1} "
+            - if option.correct?
+              span.label.label-success correct answer
+          .well
+            = markdown(option.answer)
+          h4 Explanation
+          .well
+            = markdown(option.explanation)

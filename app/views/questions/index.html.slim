@@ -1,0 +1,21 @@
+.container
+  article.page-content
+    header
+      h1 Questions
+      p = link_to 'Back', root_path
+      p
+        a.btn.btn-primary href="#{new_question_path}" New question
+    - if @questions.empty?
+      .alert.alert-info There are currently no questions in the system.
+    - else
+      - @questions.each do |question|
+        .panel.panel-default
+          .panel-heading
+            = link_to 'Delete', question, method: :delete, class: 'text-danger pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"}
+            b = question.activity.day
+            = " #{question.activity.title} "
+            = link_to 'Edit', edit_question_path(question)
+            = ' | '
+            = link_to 'View', question_path(question)
+          .panel-body
+            = markdown(question.question)

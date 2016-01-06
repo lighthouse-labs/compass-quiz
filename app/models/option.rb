@@ -2,6 +2,6 @@ class Option < ActiveRecord::Base
 
   belongs_to :question
 
-  has_many :answers
+  has_many :answers, dependent: :nullify
 
 end

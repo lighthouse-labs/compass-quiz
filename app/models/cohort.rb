@@ -1,8 +1,8 @@
 class Cohort < ActiveRecord::Base
 
-  has_many :students
+  has_many :students, dependent: :nullify
 
-  has_many :quizzes
+  has_many :quizzes, dependent: :nullify
 
   validates :compass_install, presence: true
 

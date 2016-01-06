@@ -1,52 +1,46 @@
 .container
   article.page-content
+    header
+      h1 Activities
+      p = link_to 'Back', root_path
     .row
-      .col-lg-10.col-lg-offset-1
-        header
-          h1 Activities
-        - if notice
-          .alert.alert-success.alert-dismissable role="alert"
-            = notice
-            button.close type="button" data-dismiss="alert" aria-label="Close"
-              span aria-hidden="true" &times;
-        .row
-          .col-lg-6
-            - if @activities.empty?
-              .alert.alert-info There are currently no activities in the system.
-            - else
-              - @activities.each do |activity|
-                .panel.panel-default
-                  .panel-heading
-                    b = activity.day
-                    = " #{activity.title}"
-                    = link_to 'delete', activity, method: :delete, class: 'text-danger pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" }
-                  .panel-body
-                    dl.dl-horizontal
-                      dt Compass install
-                      dd = activity.compass_install
-                      dt Compass primary key
-                      dd = activity.compass_primary_key
-          .col-lg-6
-            = form_for @activity, html: { class: 'form-horizontal' } do |f|
-              .panel.panel-primary
-                .panel-heading Add an activity
-                .panel-body
-                  - if @activity.errors.any?
-                    .alert.alert-warning
-                      p = "#{pluralize(@activity.errors.count, 'error')} prohibited this activity from being saved."
-                      ul
-                        - @activity.errors.full_messages.each do |message|
-                          li = message
-                  .form-group
-                    = f.label :title, class: 'control-label col-sm-6'
-                    .col-sm-6 = f.text_field :title, class: 'form-control'
-                  .form-group
-                    = f.label :day, class: 'control-label col-sm-6'
-                    .col-sm-6 = f.text_field :day, class: 'form-control'
-                  .form-group
-                    = f.label :compass_install, class: 'control-label col-sm-6'
-                    .col-sm-6 = f.text_field :compass_install, class: 'form-control'
-                  .form-group
-                    = f.label :compass_primary_key, class: 'control-label col-sm-6'
-                    .col-sm-6 = f.text_field :compass_primary_key, class: 'form-control'
-                .panel-footer.clearfix = f.submit class: 'btn btn-primary pull-right'
+      .col-md-6
+        - if @activities.empty?
+          .alert.alert-info There are currently no activities in the system.
+        - else
+          - @activities.each do |activity|
+            .panel.panel-default
+              .panel-heading
+                = link_to 'Delete', activity, method: :delete, class: 'text-danger pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" }
+                b = activity.day
+                = " #{activity.title}"
+              .panel-body
+                dl.dl-horizontal
+                  dt Compass install
+                  dd = activity.compass_install
+                  dt Compass primary key
+                  dd = activity.compass_primary_key
+      .col-md-6
+        = form_for @activity, html: { class: 'form-horizontal' } do |f|
+          .panel.panel-primary
+            .panel-heading Add an activity
+            .panel-body
+              - if @activity.errors.any?
+                .alert.alert-warning
+                  p = "#{pluralize(@activity.errors.count, 'error')} prohibited this activity from being saved."
+                  ul
+                    - @activity.errors.full_messages.each do |message|
+                      li = message
+              .form-group
+                = f.label :title, class: 'control-label col-sm-6'
+                .col-sm-6 = f.text_field :title, class: 'form-control'
+              .form-group
+                = f.label :day, class: 'control-label col-sm-6'
+                .col-sm-6 = f.text_field :day, class: 'form-control'
+              .form-group
+                = f.label :compass_install, class: 'control-label col-sm-6'
+                .col-sm-6 = f.text_field :compass_install, class: 'form-control'
+              .form-group
+                = f.label :compass_primary_key, class: 'control-label col-sm-6'
+                .col-sm-6 = f.text_field :compass_primary_key, class: 'form-control'
+            .panel-footer.clearfix = f.submit class: 'btn btn-primary pull-right'
