@@ -9,6 +9,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'slim-rails'
 gem 'rdiscount'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug'

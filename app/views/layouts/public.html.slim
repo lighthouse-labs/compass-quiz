@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title
+      = content_for?(:title) ? yield(:title) : 'Compass Quiz'
+    = stylesheet_link_tag 'application'
+    = csrf_meta_tags
+  body
+    main
+      - if notice
+        section.notifications
+          .container
+            .row
+              .col-md-6.col-md-push-3
+                .alert.alert-success role="alert"
+                  = notice
+      == yield
+    footer
+      .container
+        p.text-center &copy; Lighthouse Labs

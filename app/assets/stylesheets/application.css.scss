@@ -45,8 +45,13 @@ textarea.markdown {
   font-family: $font-family-monospace;
 }
 
+.notifications {
+  margin: 5rem 0 2rem;
+}
+
 .page-content {
   background: #fff;
+  margin-top: 2rem;
   padding: 4rem 4rem 16rem;
 }
 

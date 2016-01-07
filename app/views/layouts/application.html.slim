@@ -25,6 +25,17 @@ html
             li class="#{active_class(questions_path)}" = link_to 'Questions', questions_path
             li class="#{active_class(activities_path)}" = link_to 'Activities', activities_path
             li class="#{active_class(cohorts_path)}"  = link_to 'Cohorts', cohorts_path
+          ul.nav.navbar-nav.navbar-right
+            li.dropdown
+              a.dropdown-toggle href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                i.fa.fa-user
+                = " #{current_user.name}"
+              ul.dropdown-menu
+                li = link_to 'Profile', '/profile'
+                li.divider role="separator"
+                li = link_to session_path, method: :delete do
+                  i.fa.fa-sign-out
+                  = ' Sign out'
     main
       - if notice
         .container
