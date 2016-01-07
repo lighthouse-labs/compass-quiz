@@ -10,7 +10,3 @@ development:
 test:
   <<: *default
   database: compass_quiz_test
-
-production:
-  <<: *default
-  database: compass_quiz_prod

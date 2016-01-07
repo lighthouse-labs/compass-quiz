@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.1'
+
 gem 'rails', '4.2.5'
 gem 'pg'
 gem 'jquery-rails'
@@ -10,6 +12,7 @@ gem 'font-awesome-sass'
 gem 'slim-rails'
 gem 'rdiscount'
 gem 'bcrypt'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
@@ -20,3 +23,6 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
