@@ -14,7 +14,7 @@
         = f.select(:activity_id, Activity.all.map { |activity| ["#{activity.compass_install.upcase} - #{activity.day}: #{activity.title}", activity.id] }, {}, {class: 'form-control'})
       .form-group
         = f.label :question
-        = f.text_area :question, rows: 9, class: 'form-control'
+        = f.text_area :question, rows: 9, class: 'form-control markdown'
     .col-md-6
       fieldset
         legend Options
@@ -22,10 +22,10 @@
           .question-option
             .form-group
               = option_f.label :answer
-              = option_f.text_area :answer, rows: 4, class: 'form-control'
+              = option_f.text_area :answer, rows: 4, class: 'form-control markdown'
             .form-group
               = option_f.label :explanation
-              = option_f.text_area :explanation, rows: 4, class: 'form-control'
+              = option_f.text_area :explanation, rows: 4, class: 'form-control markdown'
             .form-group
               = option_f.label :correct do
                 = option_f.check_box(:correct)

@@ -21,10 +21,10 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to questions_url, notice: "Question #{@question.id} was successfully created."
+      redirect_to @question, notice: "Question #{@question.id} was successfully created."
     else
       @questions = Question.all
-      render :index
+      render :new
     end
   end
 

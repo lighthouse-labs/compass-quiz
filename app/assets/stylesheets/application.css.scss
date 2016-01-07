@@ -39,6 +39,10 @@ textarea {
   resize: vertical;
 }
 
+textarea.markdown {
+  font-family: $font-family-monospace;
+}
+
 .page-content {
   background: #fff;
   padding: 4rem 4rem 16rem;
