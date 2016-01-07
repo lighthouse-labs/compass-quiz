@@ -8,16 +8,19 @@
     - if @questions.empty?
       .alert.alert-info There are currently no questions in the system.
     - else
-      - @questions.each do |question|
-        .panel.panel-default
-          .panel-heading
-            = link_to 'Delete', question, method: :delete, class: 'text-danger pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"}
-            i = question.activity.compass_install.upcase
-            = ' '
-            b = question.activity.day
-            = " #{question.activity.title} "
-            = link_to 'Edit', edit_question_path(question)
-            = ' | '
-            = link_to 'View', question_path(question)
-          .panel-body
-            = markdown(question.question)
+      .row
+        - @questions.find_in_batches(batch_size: @questions.count / 2) do |questions|
+          .col-lg-6
+            - questions.each do |question|
+              .panel.panel-default
+                .panel-heading
+                  = link_to 'Delete', question, method: :delete, class: 'text-danger pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"}
+                  i = question.activity.compass_install.upcase
+                  = ' '
+                  b = question.activity.day
+                  = " #{question.activity.title} "
+                  = link_to 'Edit', edit_question_path(question)
+                  = ' | '
+                  = link_to 'View', question_path(question)
+                .panel-body
+                  = markdown(question.question)
