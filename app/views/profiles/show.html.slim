@@ -1,0 +1,30 @@
+.container
+  article.page-content
+    header
+      h1 Edit your profile
+      p = link_to 'Back', root_path
+    = form_for @user, url: profile_path do |f|
+      - if @user.errors.any?
+        .alert.alert-warning
+          p = "#{pluralize(@user.errors.count, 'error')} prohibited your profile from being updated."
+          ul
+            - @user.errors.full_messages.each do |message|
+              li = message
+      .row
+        .col-md-5
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :email
+            = f.text_field :email, class: 'form-control'
+        .col-md-5.col-md-push-1
+          .form-group
+            = f.label :password
+            = f.password_field :password, class: 'form-control'
+          .form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, class: 'form-control'
+      hr
+      .form-group
+        = f.submit 'Update Profile', class: 'btn btn-primary'

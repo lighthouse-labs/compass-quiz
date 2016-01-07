@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :cohorts, only: [:index, :create, :destroy]
 
+  resource :profile, only: [:show, :update]
+
   resources :questions
 
   resource :session, only: [:new, :create, :destroy]
