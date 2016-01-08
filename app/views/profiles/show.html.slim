@@ -1,5 +1,8 @@
 .container
   article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li.active Profile
     header
       h1 Edit your profile
       p = link_to 'Back', root_path

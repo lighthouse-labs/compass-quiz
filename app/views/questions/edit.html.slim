@@ -1,5 +1,10 @@
 .container
   article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li = link_to 'Questions', questions_path
+      li = link_to @question.id, @question
+      li.active Edit
     .page-header
       h1
         = 'Editing '
