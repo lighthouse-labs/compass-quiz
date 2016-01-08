@@ -7,7 +7,7 @@ html
       = content_for?(:title) ? yield(:title) : 'Compass Quiz'
     = stylesheet_link_tag 'application'
     = csrf_meta_tags
-  body
+  body.public
     main
       - if notice
         section.notifications

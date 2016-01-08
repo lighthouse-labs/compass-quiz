@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
 
   after_save :ensure_one_option
 
-  default_scope { order('created_at DESC') }
+  default_scope { joins(:activity).order('activities.compass_install, activities.day, activities.title') }
 
   protected
 

@@ -2,19 +2,17 @@
     .row
       .col-md-6.col-md-push-3
         article.page-content
-          header
+          .page-header
             h1.text-center
               i.fa.fa-compass
               = ' Compass Quiz'
           = form_tag session_path, class: 'form-horizontal' do
-            fieldset
-              legend Sign in
-              .form-group
-                = label_tag 'email', nil, class: 'control-label col-sm-3'
-                .col-sm-9 = text_field_tag 'email', session[:email], class: 'form-control', autofocus: true
-              .form-group
-                = label_tag 'password', nil, class: 'control-label col-sm-3'
-                .col-sm-9 = password_field_tag 'password', nil, class: 'form-control'
-              .form-group
-                .col-sm-9.col-sm-push-3
-                  = submit_tag 'Sign In', class: 'btn btn-primary'
+            .form-group
+              = label_tag 'email', nil, class: 'control-label col-sm-3'
+              .col-sm-9 = text_field_tag 'email', session[:email], class: 'form-control', autofocus: true
+            .form-group
+              = label_tag 'password', nil, class: 'control-label col-sm-3'
+              .col-sm-9 = password_field_tag 'password', nil, class: 'form-control'
+            .form-group
+              .col-sm-9.col-sm-push-3
+                = submit_tag 'Sign In', class: 'btn btn-primary'

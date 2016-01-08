@@ -1,8 +1,7 @@
 .container
   article.page-content
-    header
+    .page-header
       h1 Cohorts
-      p = link_to 'Back', root_path
     .row
       .col-md-6
         - if @cohorts.empty?
@@ -11,7 +10,8 @@
           - @cohorts.each do |cohort|
             .panel.panel-default
               .panel-heading
-                = link_to 'Delete', cohort, method: :delete, class: 'text-danger pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" }
+                = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
+                  i.fa.fa-trash title="Delete"
                 = cohort.name
               .panel-body
                 dl.dl-horizontal

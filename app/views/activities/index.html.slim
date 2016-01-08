@@ -1,8 +1,7 @@
 .container
   article.page-content
-    header
+    .page-header
       h1 Activities
-      p = link_to 'Back', root_path
     .row
       .col-md-6
         - if @activities.empty?
@@ -11,7 +10,8 @@
           - @activities.each do |activity|
             .panel.panel-default
               .panel-heading
-                = link_to 'Delete', activity, method: :delete, class: 'text-danger pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" }
+                = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do
+                  i.fa.fa-trash title="Delete"
                 b = activity.day
                 = " #{activity.title}"
               .panel-body
@@ -19,7 +19,9 @@
                   dt Number of questions
                   dd
                     b = "#{activity.questions.count} "
-                    = link_to '(new question)', new_question_path(activity_id: activity.id)
+                    span.text-muted = '('
+                    = link_to 'new question', new_question_path(activity_id: activity.id)
+                    span.text-muted = ')'
                   dt Compass install
                   dd = activity.compass_install
                   dt Compass primary key

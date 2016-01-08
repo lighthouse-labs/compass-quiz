@@ -15,16 +15,16 @@ $navbar-inverse-toggle-hover-bg: $navbar-inverse-bg - 15;
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-article > header {
-  margin-bottom: 4rem;
-}
-
 body > footer {
   background-color: $gray-lighter;
   color: $gray;
   min-height: 15rem;
   margin-top: 2rem;
   padding: 4rem 0;
+}
+
+body.public {
+  margin-top: 2rem;
 }
 
 main {
@@ -45,17 +45,21 @@ textarea.markdown {
   font-family: $font-family-monospace;
 }
 
-.notifications {
-  margin: 5rem 0 2rem;
-}
-
 .page-content {
   background: #fff;
-  margin-top: 2rem;
-  padding: 4rem 4rem 16rem;
+  padding: 2rem 4rem 8rem;
 }
 
 .question-option {
   border-bottom: 1px solid $gray-lighter;
   margin-bottom: 2em;
+}
+
+.text-inherit,
+.text-inherit:link,
+.text-inherit:visited,
+.text-inherit:hover,
+.text-inherit:active,
+.text-inherit:focus {
+  color: inherit;
 }
