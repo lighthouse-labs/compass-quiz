@@ -1,0 +1,16 @@
+.container
+  article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li = link_to 'Activities', activities_path
+      li.active = @activity.id
+    .page-header
+      h1
+        i = @activity.compass_install.upcase
+        = ' '
+        b = @activity.day
+        = " #{@activity.title} "
+        a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question
+    .row
+      - in_n_pages(@activity.questions, 2) do |questions|
+        .col-lg-6 = render partial: 'questions/question', collection: questions

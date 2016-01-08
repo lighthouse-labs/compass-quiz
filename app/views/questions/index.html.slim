@@ -12,18 +12,4 @@
     - else
       .row
         - in_n_pages(@questions, 2) do |questions|
-          .col-lg-6
-            - questions.each do |question|
-              .panel.panel-default
-                .panel-heading
-                  = link_to question, method: :delete, class: 'text-muted pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"} do
-                    i.fa.fa-trash title="Delete"
-                  = link_to question_path(question), class: 'text-inherit' do
-                    i = question.activity.compass_install.upcase
-                    = ' '
-                    b = question.activity.day
-                    = " #{question.activity.title}"
-                  span.text-muted = ' | '
-                  = link_to 'edit', edit_question_path(question)
-                .panel-body
-                  = markdown(question.question)
+          .col-lg-6 = render partial: 'question', collection: questions

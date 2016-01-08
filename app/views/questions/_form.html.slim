@@ -15,6 +15,7 @@
           = ' Active'
         p
           small Uncheck this box to prevent this question from appearing in quizzes.
+      hr
       .form-group
         = f.label :activity_id
         = f.select(:activity_id, Activity.all.map { |activity| ["#{activity.compass_install.upcase} - #{activity.day}: #{activity.title}", activity.id] }, {}, {class: 'form-control'})

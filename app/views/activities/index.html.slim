@@ -15,8 +15,11 @@
               .panel-heading
                 = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do
                   i.fa.fa-trash title="Delete"
-                b = activity.day
-                = " #{activity.title}"
+                = link_to activity, class: 'text-inherit' do
+                  i = activity.compass_install.upcase
+                  = ' '
+                  b = activity.day
+                  = " #{activity.title}"
               .panel-body
                 dl.dl-horizontal
                   dt Number of questions

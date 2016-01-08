@@ -11,9 +11,20 @@
     .row
       .col-md-6
         h2 Question
+        p
+          = 'This question is '
+          - if @question.active?
+            span.label.label-info active
+          - else
+            span.label.label-warning inactive
+          | .
+        hr
         h3
-          b = @question.activity.day
-          = " #{@question.activity.title}"
+          = link_to @question.activity do
+            i = @question.activity.compass_install.upcase
+            = ' '
+            b = @question.activity.day
+            = " #{@question.activity.title}"
         = markdown(@question.question)
       .col-md-6
         h2 Options
