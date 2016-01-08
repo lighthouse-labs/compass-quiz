@@ -10,6 +10,12 @@
       fieldset
         legend Question
       .form-group
+        = f.label :active do
+          = f.check_box :active
+          = ' Active'
+        p
+          small Uncheck this box to prevent this question from appearing in quizzes.
+      .form-group
         = f.label :activity_id
         = f.select(:activity_id, Activity.all.map { |activity| ["#{activity.compass_install.upcase} - #{activity.day}: #{activity.title}", activity.id] }, {}, {class: 'form-control'})
       .form-group
@@ -28,10 +34,10 @@
               = option_f.text_area :explanation, rows: 4, class: 'form-control markdown'
             .form-group
               = option_f.label :correct do
-                = option_f.check_box(:correct)
+                = option_f.check_box :correct
                 | &nbsp;Correct answer
               = option_f.label :_destroy, class: 'pull-right' do
-                = option_f.check_box(:_destroy)
+                = option_f.check_box :_destroy
                 | &nbsp;Remove option
       .form-group
         button.btn.btn-default#add-question-option Add Option

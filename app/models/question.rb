@@ -10,8 +10,6 @@ class Question < ActiveRecord::Base
 
   validates :question, presence: true
 
-  validates :active, presence: true
-
   validates :activity_id, presence: true
 
   after_save :ensure_one_option
