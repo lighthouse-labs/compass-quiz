@@ -3,9 +3,8 @@
     ol.breadcrumb
       li = link_to 'Home', root_path
       li.active Profile
-    header
+    .page-header
       h1 Edit your profile
-      p = link_to 'Back', root_path
     = form_for @user, url: profile_path do |f|
       - if @user.errors.any?
         .alert.alert-warning
