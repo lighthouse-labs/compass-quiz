@@ -4,6 +4,4 @@ class Student < ActiveRecord::Base
 
   has_many :submissions, dependent: :nullify
 
-  default_scope { order(:github_username) }
-
 end

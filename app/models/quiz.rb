@@ -4,7 +4,7 @@ class Quiz < ActiveRecord::Base
 
   belongs_to :cohort
 
-  has_many :submissions, dependent: :nullify
+  has_many :submissions, -> { includes(:student).joins(:student).order('students.github_username') }, dependent: :nullify
 
   has_and_belongs_to_many :questions
 

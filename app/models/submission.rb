@@ -8,8 +8,6 @@ class Submission < ActiveRecord::Base
 
   accepts_nested_attributes_for :answers
 
-  default_scope { includes(:student).joins(:student).order('students.github_username') }
-
   before_validation on: :create do
     unless uuid
       self.uuid = SecureRandom.uuid
