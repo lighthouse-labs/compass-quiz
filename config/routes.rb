@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'welcome#index'
+  root 'pages#home'
 
   resources :activities, only: [:index, :show, :create, :destroy]
 
@@ -10,6 +10,12 @@ Rails.application.routes.draw do
 
   resources :questions
 
+  resources :quizzes, only: [:index, :show, :create] do
+    resources :submissions, only: [:new]
+  end
+
   resource :session, only: [:new, :create, :destroy]
+
+  resources :submissions, only: [:create, :show, :destroy]
 
 end

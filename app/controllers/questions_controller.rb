@@ -23,7 +23,6 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to @question, notice: "Question #{@question.id} was successfully created."
     else
-      @questions = Question.all
       render :new
     end
   end

@@ -55,6 +55,17 @@ textarea.markdown {
   margin-bottom: 2em;
 }
 
+.submission-answer {
+  margin-top: 6rem;
+}
+
+.submission-question {
+  border-bottom: 1px solid $gray-lighter;
+  margin-bottom: 8rem;
+  margin-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 .text-inherit,
 .text-inherit:link,
 .text-inherit:visited,

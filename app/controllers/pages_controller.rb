@@ -1,7 +1,7 @@
-class WelcomeController < ApplicationController
+class PagesController < ApplicationController
 
-  def index
-    @welcome = {
+  def home
+    @page = {
       questions_count: Question.count,
       cohorts_count: Cohort.count,
       activities_count: Activity.count

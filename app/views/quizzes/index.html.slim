@@ -1,0 +1,44 @@
+.container
+  article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li.active Quizzes
+    .page-header
+      h1 Quizzes
+    .row
+      .col-md-6
+        - if @quizzes.empty?
+          .alert.alert-info There are currently no quizzes in the system.
+        - else
+          - @quizzes.each do |quiz|
+            .panel.panel-default
+              .panel-heading
+                = link_to quiz_path(quiz), class: 'text-inherit' do
+                  i = quiz.cohort.compass_install.upcase
+                  = ' '
+                  b = quiz.day
+                  = " #{quiz.cohort.name}"
+              .panel-body
+                dl.dl-horizontal
+                  dt Submissions
+                  dd = quiz.submissions.count
+                  dt Submission URL
+                  dd = link_to new_quiz_submission_url(quiz), new_quiz_submission_url(quiz)
+      .col-md-6
+        = form_for @quiz, html: {class: 'form-horizontal'} do |f|
+          .panel.panel-primary
+            .panel-heading Create a quiz
+            .panel-body
+              - if @quiz.errors.any?
+                .alert.alert-warning
+                  p = "#{pluralize(@quiz.errors.count, 'error')} prohibited this quiz from being saved."
+                  ul
+                    - @quiz.errors.full_messages.each do |message|
+                      li = message
+              .form-group
+                = f.label :day, class: 'control-label col-sm-3'
+                .col-sm-9 = f.text_field :day, class: 'form-control'
+              .form-group
+                = f.label :cohort_id, class: 'control-label col-sm-3'
+                .col-sm-9 = f.select(:cohort_id, Cohort.all.map { |cohort| ["#{cohort.compass_install.upcase} - #{cohort.name}", cohort.id] }, {}, {class: 'form-control'})
+            .panel-footer.clearfix = f.submit class: 'btn btn-primary pull-right'

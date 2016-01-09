@@ -1,0 +1,39 @@
+.container
+  .row
+    .col-md-8.col-md-push-2
+      article.page-content
+        .page-header
+          h1.text-center
+            i.fa.fa-compass
+            = ' Compass Quiz'
+        p.lead.text-center Your submission was successfully collected. Below is a summary or your answers along with the correct options.
+        hr
+        h2.text-center
+          | Result
+          br
+          span.label.label-primary
+            = @submission.score
+        hr
+        - @submission.quiz.questions.each_with_index do |question, question_index|
+          .submission-question
+            h2.text-primary = "Question #{question_index + 1}"
+            = markdown(question.question)
+            .submission-answer
+              h3.text-muted = "Question #{question_index + 1} answer"
+              .list-group
+                - question.options.each_with_index do |option, option_index|
+                  div class="list-group-item #{@submission.answers.map(&:option_id).include?(option.id) ? 'active' : ''}"
+                    .list-group-item-heading
+                      b = "Option #{option_index + 1} "
+                      - if option.correct?
+                        span.label.label-success Correct option
+                    .list-group-item-text
+                      = markdown(option.answer)
+                      - if @submission.answers.map(&:option_id).include?(option.id) || option.correct?
+                        blockquote = markdown(option.explanation)
+                      - else
+                        p
+                          a data-toggle="collapse" href="#option_#{option.id}_explanation" aria-expanded="false" aria-controls="option_#{option.id}_explanation"
+                            | toggle explanation
+                        .collapse id="option_#{option.id}_explanation"
+                          blockquote = markdown(option.explanation)

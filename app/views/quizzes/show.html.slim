@@ -1,0 +1,49 @@
+.container
+  article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li = link_to 'Quizzes', quizzes_path
+      li.active = @quiz.uuid
+    .page-header
+      h1
+        i = @quiz.cohort.compass_install.upcase
+        = ' '
+        b = @quiz.day
+        = " #{@quiz.cohort.name}"
+    .alert.alert-warning
+      p
+        i.fa.fa-exclamation-triangle
+        = ' Send the following link to students to take the quiz.'
+      p
+        = link_to new_quiz_submission_url(@quiz), new_quiz_submission_url(@quiz), class: 'alert-link'
+    .row
+      .col-md-6
+        h2 Submissions
+        - if @quiz.submissions.empty?
+          .alert.alert-info There are currently no submissions for this quiz.
+        - else
+          p = "There are #{@quiz.submissions.count} submissions."
+          table.table
+            thead
+              tr
+                th Student
+                th Score
+                th Submitted
+                th
+            tfoot
+              tr
+                th Average
+                td = (@quiz.submissions.map(&:correct).inject(&:+) / @quiz.submissions.count.to_f).round(2)
+                td
+                td
+            tbody
+              - @quiz.submissions.each do |submission|
+                tr
+                  th = link_to submission.student.github_username, submission_path(submission)
+                  td = submission.score
+                  td = submission.created_at
+                  td = link_to submission_path(submission), method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this submission?'} do
+                    i.fa.fa-trash title="Delete"
+      .col-md-6
+        h2 Questions
+        = render partial: 'questions/question', collection: @quiz.questions

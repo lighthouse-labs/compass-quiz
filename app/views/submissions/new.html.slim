@@ -1,0 +1,33 @@
+.container
+  .row
+    .col-md-8.col-md-push-2
+      article.page-content
+        .page-header
+          h1.text-center
+            i.fa.fa-compass
+            = ' Compass Quiz'
+        = form_for @submission do |f|
+          = f.hidden_field :quiz_id
+          .form-horizontal
+            .form-group
+              = label_tag 'student[github_username]', 'GitHub Username', class: 'control-label col-sm-4'
+              .col-sm-8
+                = text_field_tag 'student[github_username]', nil, class: 'form-control'
+                p.text-muted Please enter your GitHub username to associate this quiz with your Compass account.
+          - @submission.quiz.questions.each_with_index do |question, question_index|
+            .submission-question
+              h2.text-primary = "Question #{question_index + 1}"
+              = markdown(question.question)
+              .submission-answer
+                h3.text-muted = "Question #{question_index + 1} answer"
+                .list-group
+                  - question.options.each_with_index do |option, option_index|
+                    .list-group-item
+                      .list-group-item-heading
+                        = label_tag do
+                          = radio_button_tag "submission[answers_attributes][#{question_index}][option_id]", option.id
+                          = " Option #{option_index + 1}"
+                      .list-group-item-text
+                        = markdown(option.answer)
+          .form-group.text-center
+            = f.submit 'Submit', class: 'btn btn-lg btn-primary'

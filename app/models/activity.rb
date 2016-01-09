@@ -10,6 +10,10 @@ class Activity < ActiveRecord::Base
 
   validates :day, presence: true
 
+  before_save do
+    self.day = day.upcase if day
+  end
+
   default_scope { order(:compass_install, :day, :title) }
 
 end
