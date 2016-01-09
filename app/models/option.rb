@@ -6,4 +6,8 @@ class Option < ActiveRecord::Base
 
   default_scope { order(:id) }
 
+  def selected?(submission)
+    submission.option_selected?(self)
+  end
+
 end

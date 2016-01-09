@@ -32,4 +32,13 @@ class Submission < ActiveRecord::Base
     @correct ||= answers.where(options: {correct: true}).count
   end
 
+  def option_selected?(option)
+    @option_selected_memo ||= {}
+    option_id = option.is_a?(Option) ? option.id : option
+    unless @option_selected_memo.has_key?(option_id)
+      @option_selected_memo[option_id] = answers.map(&:option_id).include?(option_id)
+    end
+    @option_selected_memo[option_id]
+  end
+
 end

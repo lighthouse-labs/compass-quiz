@@ -22,18 +22,19 @@
               h3.text-muted = "Question #{question_index + 1} answer"
               .list-group
                 - question.options.each_with_index do |option, option_index|
-                  div class="list-group-item #{@submission.answers.map(&:option_id).include?(option.id) ? 'active' : ''}"
+                  div class="list-group-item #{option.correct? ? 'list-group-item-success' : option.selected?(@submission) ? 'list-group-item-danger' : ''}"
                     .list-group-item-heading
-                      b = "Option #{option_index + 1} "
-                      - if option.correct?
-                        span.label.label-success Correct option
+                      input type="radio" disabled=(!option.selected?(@submission)) checked=(option.selected?(@submission))
+                      b = " Option #{option_index + 1} "
+                      - if option.correct? || option.selected?(@submission)
+                        = "(#{option.selected?(@submission) ? 'selected, ' : ''}#{option.correct? ? 'correct' : 'incorrect'})"
                     .list-group-item-text
                       = markdown(option.answer)
-                      - if @submission.answers.map(&:option_id).include?(option.id) || option.correct?
-                        blockquote = markdown(option.explanation)
+                      - if option.selected?(@submission) || option.correct?
+                        .explanation = markdown(option.explanation)
                       - else
                         p
                           a data-toggle="collapse" href="#option_#{option.id}_explanation" aria-expanded="false" aria-controls="option_#{option.id}_explanation"
                             | toggle explanation
                         .collapse id="option_#{option.id}_explanation"
-                          blockquote = markdown(option.explanation)
+                          .explanation = markdown(option.explanation)

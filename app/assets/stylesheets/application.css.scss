@@ -45,6 +45,25 @@ textarea.markdown {
   font-family: $font-family-monospace;
 }
 
+.list-group-item {
+  .explanation {
+    @extend blockquote;
+  }
+}
+
+.list-group-item.disabled,
+.list-group-item-danger,
+.list-group-item-info,
+.list-group-item-success,
+.list-group-item-warning {
+  code {
+    background-color: rgba(127, 127, 127, .2);
+  }
+  .explanation {
+    border-color: inherit;
+  }
+}
+
 .page-content {
   background: #fff;
   padding: 2rem 4rem 8rem;
