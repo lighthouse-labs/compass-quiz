@@ -4,6 +4,6 @@ class Answer < ActiveRecord::Base
 
   belongs_to :submission
 
-  default_scope { includes(:option) }
+  default_scope { joins(:option).includes(:option) }
 
 end
