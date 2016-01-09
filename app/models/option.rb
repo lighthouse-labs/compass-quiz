@@ -4,4 +4,6 @@ class Option < ActiveRecord::Base
 
   has_many :answers, dependent: :nullify
 
+  default_scope { order(:id) }
+
 end

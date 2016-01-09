@@ -10,40 +10,49 @@
         = ' '
         b = @quiz.day
         = " #{@quiz.cohort.name}"
-    .alert.alert-warning
-      p
-        i.fa.fa-exclamation-triangle
-        = ' Send the following link to students to take the quiz.'
-      p
-        = link_to new_quiz_submission_url(@quiz), new_quiz_submission_url(@quiz), class: 'alert-link'
+    p Send the following link to students to take the quiz.
+    p
+      b Student quiz URL:
+      br
+      = link_to new_quiz_submission_url(@quiz), new_quiz_submission_url(@quiz)
+    hr
     .row
       .col-md-6
         h2 Submissions
         - if @quiz.submissions.empty?
-          .alert.alert-info There are currently no submissions for this quiz.
+          p There are currently no submissions for this quiz.
         - else
-          p = "There are #{@quiz.submissions.count} submissions."
           table.table
             thead
               tr
                 th Student
                 th Score
+                th Percent
                 th Submitted
                 th
             tfoot
               tr
                 th Average
-                td = (@quiz.submissions.map(&:correct).inject(&:+) / @quiz.submissions.count.to_f).round(2)
-                td
-                td
+                td = @quiz.average_score
+                td = "#{@quiz.average_percent}%"
+                th Number of submissions
+                td.text-right = @quiz.submissions_count
             tbody
               - @quiz.submissions.each do |submission|
                 tr
-                  th = link_to submission.student.github_username, submission_path(submission)
+                  td
+                    - if submission.student.github_username.blank?
+                      span.text-muted
+                        | [anonymous]
+                    - else
+                      b = link_to(submission.student.github_username, submission_path(submission))
                   td = submission.score
+                  td = "#{submission.percent}%"
                   td = submission.created_at
-                  td = link_to submission_path(submission), method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this submission?'} do
+                  td.text-right = link_to submission_path(submission), method: :delete, class: 'text-muted', data: {confirm: 'Are you sure you want to delete this submission?'} do
                     i.fa.fa-trash title="Delete"
       .col-md-6
         h2 Questions
-        = render partial: 'questions/question', collection: @quiz.questions
+        - @quiz.questions.each_with_index do |question, question_index|
+          h3 = link_to "Question #{question_index + 1}", question
+          = markdown(question.question)

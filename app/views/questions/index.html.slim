@@ -8,7 +8,7 @@
         = 'All Questions '
         a.btn.btn-xs.btn-primary href="#{new_question_path}" New Question
     - if @questions.empty?
-      .alert.alert-info There are currently no questions in the system.
+      p There are currently no questions in the system.
     - else
       .row
         - in_n_pages(@questions, 2) do |questions|

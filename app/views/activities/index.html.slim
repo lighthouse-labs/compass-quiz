@@ -8,7 +8,7 @@
     .row
       .col-md-6
         - if @activities.empty?
-          .alert.alert-info There are currently no activities in the system.
+          p There are currently no activities in the system.
         - else
           - @activities.each do |activity|
             .panel.panel-default

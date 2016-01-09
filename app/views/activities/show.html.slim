@@ -11,6 +11,9 @@
         b = @activity.day
         = " #{@activity.title} "
         a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question
-    .row
-      - in_n_pages(@activity.questions, 2) do |questions|
-        .col-lg-6 = render partial: 'questions/question', collection: questions
+    - if @activity.questions.empty?
+      p There are currently no questions for this activity.
+    - else
+      .row
+        - in_n_pages(@activity.questions, 2) do |questions|
+          .col-lg-6 = render partial: 'questions/question', collection: questions

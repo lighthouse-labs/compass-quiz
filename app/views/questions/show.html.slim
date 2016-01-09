@@ -19,13 +19,16 @@
             span.label.label-warning inactive
           | .
         hr
-        h3
-          = link_to @question.activity do
+        dl
+          dt Activity
+          dd = link_to @question.activity do
             i = @question.activity.compass_install.upcase
             = ' '
             b = @question.activity.day
             = " #{@question.activity.title}"
-        = markdown(@question.question)
+        dl
+          dt Question text
+          dd = markdown(@question.question)
       .col-md-6
         h2 Options
         - @question.options.each_with_index do |option, index|

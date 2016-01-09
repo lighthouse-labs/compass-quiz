@@ -6,5 +6,4 @@ class Student < ActiveRecord::Base
 
   default_scope { order(:github_username) }
 
-
 end

@@ -1,12 +1,13 @@
 class QuizzesController < ApplicationController
 
+  before_action :set_quiz, only: [:show, :destroy]
+
   def index
     @quizzes = Quiz.all
     @quiz = Quiz.new
   end
 
   def show
-    @quiz = Quiz.find_by(uuid: params[:id])
   end
 
   def create
@@ -19,7 +20,16 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def destroy
+    @quiz.destroy
+    redirect_to quizzes_url, notice: "Quiz #{@quiz.uuid} was successfully destroyed."
+  end
+
   protected
+
+  def set_quiz
+    @quiz = Quiz.find_by(uuid: params[:id])
+  end
 
   def quiz_params
     params.require(:quiz).permit(:cohort_id, :day)

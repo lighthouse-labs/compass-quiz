@@ -8,7 +8,7 @@
     .row
       .col-md-6
         - if @cohorts.empty?
-          .alert.alert-info There are currently no cohorts in the system.
+          p There are currently no cohorts in the system.
         - else
           - @cohorts.each do |cohort|
             .panel.panel-default

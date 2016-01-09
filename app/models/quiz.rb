@@ -39,4 +39,20 @@ class Quiz < ActiveRecord::Base
     uuid
   end
 
+  def average_score
+    (submissions.map(&:correct).inject(&:+) / submissions_count.to_f).round(1)
+  end
+
+  def average_percent
+    (submissions.map(&:percent).inject(&:+) / submissions_count.to_f).floor
+  end
+
+  def questions_count
+    @questions_count ||= questions.count
+  end
+
+  def submissions_count
+    @submissions_count ||= submissions.count
+  end
+
 end
