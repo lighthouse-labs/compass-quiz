@@ -10,28 +10,32 @@
         = ' '
         b = @activity.day
         = " #{@activity.title}"
-      p = render partial: 'shared/header_timestamps', locals: {model: @activity}
-    = form_for @activity do |f|
-      .row
-        .col-md-6
-          .form-horizontal
-            .form-group
-              = f.label :title, class: 'control-label col-md-3'
-              .col-md-9 = f.text_field :title, class: 'form-control'
-        .col-md-6
-          .form-horizontal
-            .form-group
-              = f.label :day, class: 'control-label col-md-6'
-              .col-md-6 = f.text_field :day, class: 'form-control'
-            .form-group
-              = f.label :compass_install, class: 'control-label col-md-6'
-              .col-md-6 = f.text_field :compass_install, class: 'form-control'
-            .form-group
-              = f.label :compass_primary_key, class: 'control-label col-md-6'
-              .col-md-6 = f.text_field :compass_primary_key, class: 'form-control'
-      .form-group.text-right
-        = f.submit class: 'btn btn-primary'
-    hr
+      p
+        = render partial: 'shared/header_timestamps', locals: {model: @activity}
+        = ' | '
+        a href="#edit-activity-form-container" data-toggle="collapse" Edit activity
+    #edit-activity-form-container class="collapse #{'in' if @activity.errors.any?}"
+      = form_for @activity do |f|
+        = render partial: 'shared/form_errors', locals: {model: @activity}
+        .row
+          .col-md-6
+            .form-horizontal
+              .form-group
+                = f.label :title, class: 'control-label col-md-3'
+                .col-md-9 = f.text_field :title, class: 'form-control'
+          .col-md-6
+            .form-horizontal
+              .form-group
+                = f.label :day, class: 'control-label col-md-6'
+                .col-md-6 = f.text_field :day, class: 'form-control'
+              .form-group
+                = f.label :compass_install, class: 'control-label col-md-6'
+                .col-md-6 = f.text_field :compass_install, class: 'form-control'
+              .form-group
+                = f.label :compass_primary_key, class: 'control-label col-md-6'
+                .col-md-6 = f.text_field :compass_primary_key, class: 'form-control'
+        .form-group.text-right
+          = f.submit class: 'btn btn-primary'
     h2
       = 'Questions '
       a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question

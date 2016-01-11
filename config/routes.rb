@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :activities, only: [:index, :show, :create, :destroy, :update]
 
-  resources :cohorts, only: [:index, :create, :destroy]
+  resources :cohorts, only: [:index, :create, :destroy, :show, :update]
 
   resource :profile, only: [:show, :update]
 

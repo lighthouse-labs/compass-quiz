@@ -1,5 +1,7 @@
 class CohortsController < ApplicationController
 
+  before_action :set_cohort, only: [:show, :destroy, :update]
+
   def index
     @cohorts = Cohort.all
     @cohort = Cohort.new
@@ -15,8 +17,15 @@ class CohortsController < ApplicationController
     end
   end
 
+  def update
+    if @cohort.update(cohort_params)
+      redirect_to @cohort, notice: "#{cohort_name(@cohort)} was successfully updated."
+    else
+      render :show
+    end
+  end
+
   def destroy
-    @cohort = Cohort.find(params[:id])
     @cohort.destroy
     redirect_to cohorts_url, notice: "#{cohort_name(@cohort)} was successfully destroyed."
   end
@@ -30,6 +39,10 @@ class CohortsController < ApplicationController
   helper_method :cohort_name
 
   protected
+
+  def set_cohort
+    @cohort = Cohort.find(params[:id])
+  end
 
   def cohort_params
     params.require(:cohort).permit(:name, :compass_install, :compass_primary_key)

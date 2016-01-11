@@ -1,0 +1,6 @@
+- if model.errors.any?
+  .alert.alert-warning
+    p = "#{pluralize(model.errors.count, 'error')} prohibited this #{model.class.to_s.humanize(capitalize: false)} from being saved."
+    ul
+      - model.errors.full_messages.each do |message|
+        li = message

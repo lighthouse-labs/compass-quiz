@@ -1,0 +1,33 @@
+.container
+  article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li = link_to 'Cohorts', cohorts_path
+      li.active = "#{@cohort.compass_install.upcase} #{@cohort.name}"
+    .page-header
+      h1
+        i = @cohort.compass_install.upcase
+        = " #{@cohort.name}"
+      p
+        = render partial: 'shared/header_timestamps', locals: {model: @cohort}
+        = ' | '
+        a href="#edit-cohort-form-container" data-toggle="collapse" Edit cohort
+    #edit-cohort-form-container class="collapse #{'in' if @cohort.errors.any?}"
+      = form_for @cohort do |f|
+        = render partial: 'shared/form_errors', locals: {model: @cohort}
+        .row
+          .col-md-6
+            .form-horizontal
+              .form-group
+                = f.label :name, class: 'control-label col-md-3'
+                .col-md-9 = f.text_field :name, class: 'form-control'
+          .col-md-6
+            .form-horizontal
+              .form-group
+                = f.label :compass_install, class: 'control-label col-md-6'
+                .col-md-6 = f.text_field :compass_install, class: 'form-control'
+              .form-group
+                = f.label :compass_primary_key, class: 'control-label col-md-6'
+                .col-md-6 = f.text_field :compass_primary_key, class: 'form-control'
+        .form-group.text-right
+          = f.submit class: 'btn btn-primary'

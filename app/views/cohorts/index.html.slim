@@ -15,9 +15,15 @@
               .panel-heading
                 = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
                   i.fa.fa-trash title="Delete"
-                = cohort.name
+                = link_to cohort, class: 'text-inherit' do
+                  i = cohort.compass_install.upcase
+                  = " #{cohort.name}"
               .panel-body
                 dl.dl-horizontal
+                  dt Students
+                  dd = cohort.students.count
+                  dt Quizzes
+                  dd = cohort.quizzes.count
                   dt Compass install
                   dd = cohort.compass_install
                   dt Compass primary key
@@ -27,12 +33,7 @@
           .panel.panel-primary
             .panel-heading Add a cohort
             .panel-body
-              - if @cohort.errors.any?
-                .alert.alert-warning
-                  p = "#{pluralize(@cohort.errors.count, 'error')} prohibited this cohort from being saved."
-                  ul
-                    - @cohort.errors.full_messages.each do |message|
-                      li = message
+              = render partial: 'shared/form_errors', locals: {model: @cohort}
               .form-group
                 = f.label :name, class: 'control-label col-sm-6'
                 .col-sm-6 = f.text_field :name, class: 'form-control'

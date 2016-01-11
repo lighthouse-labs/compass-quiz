@@ -37,12 +37,7 @@
           .panel.panel-primary
             .panel-heading Add an activity
             .panel-body
-              - if @activity.errors.any?
-                .alert.alert-warning
-                  p = "#{pluralize(@activity.errors.count, 'error')} prohibited this activity from being saved."
-                  ul
-                    - @activity.errors.full_messages.each do |message|
-                      li = message
+              = render partial: 'shared/form_errors', locals: {model: @activity}
               .form-group
                 = f.label :title, class: 'control-label col-sm-6'
                 .col-sm-6 = f.text_field :title, class: 'form-control'

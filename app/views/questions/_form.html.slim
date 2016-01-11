@@ -1,10 +1,5 @@
 = form_for @question do |f|
-  - if @question.errors.any?
-    .alert.alert-warning
-      p = "#{pluralize(@question.errors.count, 'error')} prohibited this question from being saved."
-      ul
-        - @question.errors.full_messages.each do |message|
-          li = message
+  = render partial: 'shared/form_errors', locals: {model: @question}
   .row
     .col-md-6
       fieldset
