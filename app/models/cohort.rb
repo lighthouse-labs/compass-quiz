@@ -1,8 +1,8 @@
 class Cohort < ActiveRecord::Base
 
-  has_many :students, dependent: :nullify
+  has_many :students, -> { order('students.github_username') }, dependent: :nullify
 
-  has_many :quizzes, dependent: :nullify
+  has_many :quizzes, -> { unscoped.order('quizzes.created_at') }, dependent: :nullify
 
   validates :compass_install, presence: true
 

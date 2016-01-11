@@ -11,7 +11,10 @@
         b = @quiz.day
         = " #{@quiz.cohort.name}"
       p = render partial: 'shared/header_timestamps', locals: {model: @quiz}
-    p Send the following link to students to take the quiz.
+    p
+      = 'Send the following link to students in the '
+      = link_to @quiz.cohort.name, @quiz.cohort
+      = ' cohort to take the quiz.'
     p
       b Student quiz URL:
       br

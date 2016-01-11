@@ -24,6 +24,8 @@
                 dl.dl-horizontal
                   dt Submissions
                   dd = quiz.submissions.count
+                  dt Cohort
+                  dd = link_to quiz.cohort.name, quiz.cohort
                   dt Student quiz URL
                   dd = link_to new_quiz_submission_url(quiz), new_quiz_submission_url(quiz)
       .col-md-6
@@ -31,7 +33,7 @@
           .panel.panel-primary
             .panel-heading Create a quiz
             .panel-body
-              = render partial: 'shared/form_errors', locals: {model: @question}
+              = render partial: 'shared/form_errors', locals: {model: @quiz}
               .form-group
                 = f.label :day, class: 'control-label col-sm-3'
                 .col-sm-9 = f.text_field :day, class: 'form-control'

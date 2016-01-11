@@ -8,7 +8,7 @@
             = ' Compass Quiz'
         = form_for @submission do |f|
           = f.hidden_field :quiz_id
-          .form-horizontal
+          .alert.alert-warning.form-horizontal
             .form-group
               = label_tag 'student[github_username]', 'GitHub Username', class: 'control-label col-sm-4'
               .col-sm-8

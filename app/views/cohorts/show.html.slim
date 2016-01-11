@@ -31,3 +31,23 @@
                 .col-md-6 = f.text_field :compass_primary_key, class: 'form-control'
         .form-group.text-right
           = f.submit class: 'btn btn-primary'
+    table.table
+      thead
+        tr
+          th Student
+          - @cohort.quizzes.each_with_index do |quiz, index|
+            th = link_to "Quiz ##{index + 1}", quiz
+      tbody
+        - @cohort.students.each do |student|
+          tr
+            td
+              - if student.github_username.blank?
+                span.text-muted
+                  | [anonymous]
+              - else
+                = student.github_username
+            - @cohort.quizzes.each do |quiz|
+              td
+                - quiz.submissions.each do |submission|
+                  - if submission.student_id == student.id
+                    .score = link_to submission.score, submission
