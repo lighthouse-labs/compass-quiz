@@ -13,7 +13,7 @@
       p
         = render partial: 'shared/header_timestamps', locals: {model: @activity}
         = ' | '
-        a href="#edit-activity-form-container" data-toggle="collapse" Edit activity
+        a href="#edit-activity-form-container" data-toggle="collapse" edit
     #edit-activity-form-container class="collapse #{'in' if @activity.errors.any?}"
       = form_for @activity do |f|
         = render partial: 'shared/form_errors', locals: {model: @activity}

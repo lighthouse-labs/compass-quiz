@@ -11,7 +11,7 @@
       p
         = render partial: 'shared/header_timestamps', locals: {model: @cohort}
         = ' | '
-        a href="#edit-cohort-form-container" data-toggle="collapse" Edit cohort
+        a href="#edit-cohort-form-container" data-toggle="collapse" edit
     #edit-cohort-form-container class="collapse #{'in' if @cohort.errors.any?}"
       = form_for @cohort do |f|
         = render partial: 'shared/form_errors', locals: {model: @cohort}
