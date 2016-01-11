@@ -9,11 +9,16 @@
         = form_for @submission do |f|
           = f.hidden_field :quiz_id
           .alert.alert-warning.form-horizontal
+            - if @student_error
+              .alert.alert-danger
+                i.fa.fa-exclamation-triangle
+                = ' You must associate this quiz submission with an account.'
             .form-group
               = label_tag 'student[github_username]', 'GitHub Username', class: 'control-label col-sm-4'
               .col-sm-8
                 = text_field_tag 'student[github_username]', nil, class: 'form-control'
-                p.text-muted Please enter your GitHub username to associate this quiz with your Compass account.
+                p
+                  small Enter your GitHub username to associate this quiz with your account.
           - @submission.quiz.questions.each_with_index do |question, question_index|
             .submission-question
               h2.text-primary = "Question ##{question_index + 1}"
@@ -25,7 +30,7 @@
                     .list-group-item
                       .list-group-item-heading
                         = label_tag do
-                          = radio_button_tag "submission[answers_attributes][#{question_index}][option_id]", option.id
+                          = radio_button_tag "submission[answers_attributes][#{question_index}][option_id]", option.id, @submission.option_selected?(option)
                           = " Option #{option_index + 1}"
                       .list-group-item-text
                         = markdown(option.answer)

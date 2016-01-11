@@ -13,7 +13,7 @@
           - @quizzes.each do |quiz|
             .panel.panel-default
               .panel-heading
-                = link_to quiz, method: :delete, class: 'text-muted pull-right', data: {confirm: "Are you sure you want to delete this quiz?"} do
+                = link_to quiz, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this quiz?'} do
                   i.fa.fa-trash title="Delete"
                 = link_to quiz_path(quiz), class: 'text-inherit' do
                   i = quiz.cohort.compass_install.upcase
@@ -26,8 +26,6 @@
                   dd = quiz.submissions.count
                   dt Cohort
                   dd = link_to quiz.cohort.name, quiz.cohort
-                  dt Student quiz URL
-                  dd = link_to new_quiz_submission_url(quiz), new_quiz_submission_url(quiz)
       .col-md-6
         = form_for @quiz, html: {class: 'form-horizontal'} do |f|
           .panel.panel-primary

@@ -5,16 +5,22 @@ class SubmissionsController < ApplicationController
   skip_before_action :authenticate_user, only: [:new, :create, :show]
 
   def new
+    @student_error = false
     quiz = Quiz.find_by!(uuid: params[:quiz_id])
     @submission = Submission.new(quiz: quiz)
     render layout: 'public'
   end
 
   def create
+    @student_error = false
     @submission = Submission.new(submission_params)
-    @submission.student = Student.find_or_create_by!(github_username: params[:student][:github_username])
-    @submission.student.update_attributes cohort: @submission.quiz.cohort
-    if @submission.save
+    begin
+      @submission.student = Student.find_or_create_by!(github_username: params[:student][:github_username])
+      @submission.student.update_attributes cohort: @submission.quiz.cohort
+    rescue ActiveRecord::ActiveRecordError
+      @student_error = true
+    end
+    if !@student_error && @submission.save
       redirect_to @submission
     else
       render :new, layout: 'public'
