@@ -2,11 +2,7 @@
   .panel-heading
     = link_to question, method: :delete, class: 'text-muted pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"} do
       i.fa.fa-trash title="Delete"
-      = link_to question_path(question), class: 'text-inherit' do
-        i = question.activity.compass_install.upcase
-        = ' '
-        b = question.activity.day
-        = " #{question.activity.title}"
+    = link_to "Question #{question.id}", question_path(question), class: 'text-inherit'
     span.text-muted = ' | '
     = link_to 'edit', edit_question_path(question)
   .panel-body

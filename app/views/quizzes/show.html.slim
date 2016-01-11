@@ -54,5 +54,5 @@
       .col-md-6
         h2 Questions
         - @quiz.questions.each_with_index do |question, question_index|
-          h3 = link_to "Question #{question_index + 1}", question
+          h3 = link_to "Question ##{question_index + 1}", question
           = markdown(question.question)

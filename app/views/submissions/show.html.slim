@@ -16,10 +16,10 @@
         hr
         - @submission.quiz.questions.each_with_index do |question, question_index|
           .submission-question
-            h2.text-primary = "Question #{question_index + 1}"
+            h2.text-primary = "Question ##{question_index + 1}"
             = markdown(question.question)
             .submission-answer
-              h3.text-muted = "Question #{question_index + 1} answer"
+              h3.text-muted = "Question ##{question_index + 1} answer"
               .list-group
                 - question.options.each_with_index do |option, option_index|
                   div class="list-group-item #{option.correct? ? 'list-group-item-success' : option.selected?(@submission) ? 'list-group-item-danger' : ''}"

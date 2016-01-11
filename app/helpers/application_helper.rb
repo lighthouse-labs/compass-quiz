@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def markdown(text)
     return '' unless text
 
