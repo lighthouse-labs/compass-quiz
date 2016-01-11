@@ -8,6 +8,7 @@
       h1
         = "Question #{@question.id} "
         = link_to 'Edit', edit_question_path, class: 'btn btn-xs btn-default'
+      p = render partial: 'shared/header_timestamps', locals: {model: @question}
     .row
       .col-md-6
         h2 Question

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :activities, only: [:index, :show, :create, :destroy]
+  resources :activities, only: [:index, :show, :create, :destroy, :update]
 
   resources :cohorts, only: [:index, :create, :destroy]
 

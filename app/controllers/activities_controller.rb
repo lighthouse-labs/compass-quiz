@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
 
-  before_action :set_activity, only: [:show, :destroy]
+  before_action :set_activity, only: [:show, :destroy, :update]
 
   def index
     @activities = Activity.all
@@ -17,6 +17,14 @@ class ActivitiesController < ApplicationController
     else
       @activities = Activity.all
       render :index
+    end
+  end
+
+  def update
+    if @activity.update(activity_params)
+      redirect_to @activity, notice: "#{activity_title(@activity)} was successfully updated."
+    else
+      render :show
     end
   end
 

@@ -9,8 +9,32 @@
         i = @activity.compass_install.upcase
         = ' '
         b = @activity.day
-        = " #{@activity.title} "
-        a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question
+        = " #{@activity.title}"
+      p = render partial: 'shared/header_timestamps', locals: {model: @activity}
+    = form_for @activity do |f|
+      .row
+        .col-md-6
+          .form-horizontal
+            .form-group
+              = f.label :title, class: 'control-label col-md-3'
+              .col-md-9 = f.text_field :title, class: 'form-control'
+        .col-md-6
+          .form-horizontal
+            .form-group
+              = f.label :day, class: 'control-label col-md-6'
+              .col-md-6 = f.text_field :day, class: 'form-control'
+            .form-group
+              = f.label :compass_install, class: 'control-label col-md-6'
+              .col-md-6 = f.text_field :compass_install, class: 'form-control'
+            .form-group
+              = f.label :compass_primary_key, class: 'control-label col-md-6'
+              .col-md-6 = f.text_field :compass_primary_key, class: 'form-control'
+      .form-group.text-right
+        = f.submit class: 'btn btn-primary'
+    hr
+    h2
+      = 'Questions '
+      a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question
     - if @activity.questions.empty?
       p There are currently no questions for this activity.
     - else

@@ -5,6 +5,7 @@
       li.active Profile
     .page-header
       h1 Edit your profile
+      p = render partial: 'shared/header_timestamps', locals: {model: @user}
     = form_for @user, url: profile_path do |f|
       - if @user.errors.any?
         .alert.alert-warning

@@ -1,0 +1,3 @@
+= model.created_at.to_formatted_s(:rfc822)
+- unless model.created_at == model.updated_at
+  span.text-muted = " (modified #{model.updated_at.to_formatted_s(:rfc822)})"
