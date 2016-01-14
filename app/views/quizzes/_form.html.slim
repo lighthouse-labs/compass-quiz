@@ -1,0 +1,12 @@
+= form_for @quiz, html: {class: 'form-horizontal'} do |f|
+  .panel.panel-primary
+    .panel-heading Create a quiz
+    .panel-body
+      = render partial: 'shared/form_errors', locals: {model: @quiz}
+      .form-group
+        = f.label :day, class: 'control-label col-sm-3'
+        .col-sm-9 = f.select(:day, quiz_day_options, {}, {class: 'form-control'})
+      .form-group
+        = f.label :cohort_id, class: 'control-label col-sm-3'
+        .col-sm-9 = f.select(:cohort_id, Cohort.all.map { |cohort| ["#{cohort.compass_install.upcase} - #{cohort.name}", cohort.id] }, {}, {class: 'form-control'})
+    .panel-footer.clearfix = f.submit class: 'btn btn-primary pull-right'

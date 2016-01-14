@@ -15,4 +15,16 @@ module ApplicationHelper
     number_of_pages.times { |page| yield relation.limit(page_size).offset(page_size * page) }
   end
 
+  def quiz_day_options
+    Activity.unscoped
+      .select(:day)
+      .distinct
+      .joins(:questions)
+      .group(:day)
+      .having('COUNT(questions.*) >= ?', Quiz::QUESTIONS_PER_QUIZ)
+      .order(:day)
+      .map(&:day)
+      .map(&:upcase)
+  end
+
 end
