@@ -6,17 +6,14 @@
       .col-sm-5
         p.lead Choose a management option:
         .list-group
-          = link_to quizzes_path, class: 'list-group-item' do
-            | Quizzes
-            span.badge = @page[:quizzes_count]
-          = link_to activities_path, class: 'list-group-item' do
-            | Activities
-            span.badge = @page[:activities_count]
-          = link_to questions_path, class: 'list-group-item' do
-            | Questions
-            span.badge = @page[:questions_count]
-          = link_to cohorts_path, class: 'list-group-item' do
-            | Cohorts
-            span.badge = @page[:cohorts_count]
+          - @page.keys.sort.each do |key|
+            = link_to try(key.to_s + '_path'), class: 'list-group-item' do
+              b = key.to_s.humanize
+              - if @page[key][:last_updated]
+                small.text-muted
+                  = ' | last updated '
+                  b = time_ago_in_words(@page[key][:last_updated])
+                  = ' ago'
+              span.badge = @page[key][:count]
       .col-sm-6.col-sm-push-1
         = render partial: 'quizzes/form'

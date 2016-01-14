@@ -1,3 +1,3 @@
-= model.created_at.to_formatted_s(:rfc822)
+= "Created #{time_ago_in_words(model.created_at)} ago"
 - unless model.created_at == model.updated_at
-  span.text-muted = " (modified #{model.updated_at.to_formatted_s(:rfc822)})"
+  span.text-muted = " (and modified #{time_ago_in_words(model.updated_at)} ago)"
