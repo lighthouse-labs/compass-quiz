@@ -1,0 +1,38 @@
+.container
+  article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li.active Users
+    .page-header
+      h1 Users
+    .row
+      .col-md-6
+        - if @users.empty?
+          p There are currently no users in the system.
+        - else
+          table.table
+            thead
+              tr
+                th Name
+                th Email
+                th
+            tbody
+              - @users.each do |user|
+                tr
+                  td = user.name
+                  td = user.email
+                  td.text-right = link_to user, method: :delete, class: 'text-muted', data: {confirm: "Are you sure you want to delete user #{user.id}?"} do
+                    i.fa.fa-trash title="Delete"
+      .col-md-6
+        = form_for @user, html: {class: 'form-horizontal'} do |f|
+          .panel.panel-primary
+            .panel-heading Add a user
+            .panel-body
+              = render partial: 'shared/form_errors', locals: {model: @user}
+              .form-group
+                = f.label :name, class: 'control-label col-sm-3'
+                .col-sm-9 = f.text_field :name, class: 'form-control'
+              .form-group
+                = f.label :email, class: 'control-label col-sm-3'
+                .col-sm-9 = f.text_field :email, class: 'form-control'
+            .panel-footer.clearfix = f.submit class: 'btn btn-primary pull-right'

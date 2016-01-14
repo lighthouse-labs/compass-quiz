@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   resources :submissions, only: [:create, :show, :destroy]
 
+  resources :users, only: [:index, :create, :destroy]
+
 end
