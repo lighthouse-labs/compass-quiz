@@ -36,23 +36,26 @@
     - if @cohort.quizzes.empty?
       p There are currently no quizzes for this cohort in the system.
     - else
-      table.table
-        thead
-          tr
-            th Student
-            - @cohort.quizzes.each_with_index do |quiz, index|
-              th = link_to "Quiz ##{index + 1}", quiz
-        tbody
-          - @cohort.students.each do |student|
+      p Submissions show the number of correct answers given, incorrect answers given, and omitted questions in the format: <b>correct</b><span class="text-muted">, incorrect, omitted</span>.
+      .table-responsive
+        table.table.table-condensed
+          thead
             tr
-              td
-                - if student.github_username.blank?
-                  span.text-muted
-                    | [anonymous]
-                - else
-                  = student.github_username
-              - @cohort.quizzes.each do |quiz|
+              th Student
+              - @cohort.quizzes.each_with_index do |quiz, index|
+                th.text-right.text-nowrap = link_to "Quiz ##{index + 1}", quiz
+          tbody
+            - @cohort.students.each do |student|
+              tr
                 td
-                  - quiz.submissions.each do |submission|
-                    - if submission.student_id == student.id
-                      .score = link_to submission.score, submission
+                  = student.github_username
+                - @cohort.quizzes.each do |quiz|
+                  td.text-right
+                    - @submission_stats.select { |s| s.student_id == student.id && s.quiz_id == quiz.id }.group_by(&:uuid).each_value do |submissions|
+                      .score = link_to submissions.first, class: 'text-inherit' do
+                        b title="correct" = submissions.find(&:options_correct).try(:answers_count) || '0'
+                        span.text-muted
+                          = ', '
+                          span title="incorrect" = submissions.find { |s| s.options_correct.equal?(false) }.try(:answers_count) || '0'
+                          = ', '
+                          span title="omitted" = submissions.find { |s| s.options_correct.nil? }.try(:answers_count) || '0'
