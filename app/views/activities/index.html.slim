@@ -13,23 +13,18 @@
           table.table
             thead
               tr
+                th width="100%" Activity
                 th
                   abbr title="Compass install" Install
                 th
                   abbr title="Compass primary key" PK
-                th Day
-                th Title
-                th
                 th
             tbody
               - @activities.each do |activity|
                 tr
+                  td = link_to "#{activity.day} #{activity.title}", activity
                   td = activity.compass_install
                   td = activity.compass_primary_key
-                  td = activity.day
-                  td = link_to activity.title, activity
-                  td.text-right
-                    = link_to activity.questions.count, new_question_path(activity_id: activity.id), class: 'label label-primary', title: 'Add a question for this activity'
                   td.text-right
                     = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do
                       i.fa.fa-trash title="Delete"
