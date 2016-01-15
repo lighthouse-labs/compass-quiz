@@ -10,24 +10,24 @@
         - if @cohorts.empty?
           p There are currently no cohorts in the system.
         - else
-          - @cohorts.each do |cohort|
-            .panel.panel-default
-              .panel-heading
-                = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
-                  i.fa.fa-trash title="Delete"
-                = link_to cohort, class: 'text-inherit' do
-                  i = cohort.compass_install.upcase
-                  = " #{cohort.name}"
-              .panel-body
-                dl.dl-horizontal
-                  dt Students
-                  dd = cohort.students.count
-                  dt Quizzes
-                  dd = cohort.quizzes.count
-                  dt Compass install
-                  dd = cohort.compass_install
-                  dt Compass primary key
-                  dd = cohort.compass_primary_key
+          table.table
+            thead
+              tr
+                th
+                  abbr title="Compass install" Install
+                th
+                  abbr title="Compass primary key" PK
+                th Name
+                th
+            tbody
+              - @cohorts.each do |cohort|
+                tr
+                  td = cohort.compass_install
+                  td = cohort.compass_primary_key
+                  td = link_to cohort.name, cohort
+                  td.text-right
+                    = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
+                      i.fa.fa-trash title="Delete"
       .col-md-6
         = form_for @cohort, html: { class: 'form-horizontal' } do |f|
           .panel.panel-primary

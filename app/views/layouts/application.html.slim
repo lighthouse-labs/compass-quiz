@@ -21,10 +21,10 @@ html
             = ' Compass Quiz'
         .collapse.navbar-collapse#navbar-collapse
           ul.nav.navbar-nav
-            li class="#{active_class(quizzes_path)}" = link_to 'Quizzes', quizzes_path
-            li class="#{active_class(questions_path)}" = link_to 'Questions', questions_path
             li class="#{active_class(activities_path)}" = link_to 'Activities', activities_path
-            li class="#{active_class(cohorts_path)}"  = link_to 'Cohorts', cohorts_path
+            li class="#{active_class(cohorts_path)}" = link_to 'Cohorts', cohorts_path
+            li class="#{active_class(questions_path)}" = link_to 'Questions', questions_path
+            li class="#{active_class(quizzes_path)}" = link_to 'Quizzes', quizzes_path
             li class="#{active_class(users_path)}"  = link_to 'Users', users_path
           ul.nav.navbar-nav.navbar-right
             li.dropdown

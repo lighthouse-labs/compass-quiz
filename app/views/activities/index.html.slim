@@ -10,28 +10,29 @@
         - if @activities.empty?
           p There are currently no activities in the system.
         - else
-          - @activities.each do |activity|
-            .panel.panel-default
-              .panel-heading
-                = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do
-                  i.fa.fa-trash title="Delete"
-                = link_to activity, class: 'text-inherit' do
-                  i = activity.compass_install.upcase
-                  = ' '
-                  b = activity.day
-                  = " #{activity.title}"
-              .panel-body
-                dl.dl-horizontal
-                  dt Number of questions
-                  dd
-                    b = "#{activity.questions.count} "
-                    span.text-muted = '('
-                    = link_to 'new question', new_question_path(activity_id: activity.id)
-                    span.text-muted = ')'
-                  dt Compass install
-                  dd = activity.compass_install
-                  dt Compass primary key
-                  dd = activity.compass_primary_key
+          table.table
+            thead
+              tr
+                th
+                  abbr title="Compass install" Install
+                th
+                  abbr title="Compass primary key" PK
+                th Day
+                th Title
+                th
+                th
+            tbody
+              - @activities.each do |activity|
+                tr
+                  td = activity.compass_install
+                  td = activity.compass_primary_key
+                  td = activity.day
+                  td = link_to activity.title, activity
+                  td.text-right
+                    = link_to activity.questions.count, new_question_path(activity_id: activity.id), class: 'label label-primary', title: 'Add a question for this activity'
+                  td.text-right
+                    = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do
+                      i.fa.fa-trash title="Delete"
       .col-md-6
         = form_for @activity, html: { class: 'form-horizontal' } do |f|
           .panel.panel-primary

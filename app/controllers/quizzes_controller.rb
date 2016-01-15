@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :destroy]
 
   def index
-    @quizzes = Quiz.all
+    set_quizzes
     @quiz = Quiz.new
   end
 
@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
     if @quiz.save
       redirect_to @quiz, notice: "Quiz #{@quiz.uuid} was successfully created."
     else
-      @quizzes = Quiz.all
+      set_quizzes
       render :index
     end
   end
@@ -29,6 +29,10 @@ class QuizzesController < ApplicationController
 
   def set_quiz
     @quiz = Quiz.find_by(uuid: params[:id])
+  end
+
+  def set_quizzes
+    @quizzes = Quiz.unscope(:order).order(created_at: :desc)
   end
 
   def quiz_params
