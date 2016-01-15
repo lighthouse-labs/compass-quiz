@@ -36,9 +36,10 @@
                 .col-md-6 = f.text_field :compass_primary_key, class: 'form-control'
         .form-group.text-right
           = f.submit class: 'btn btn-primary'
-    h2
-      = 'Questions '
-      a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question
+    .clearfix
+      h2
+        = 'Questions '
+        a.btn.btn-xs.btn-primary href="#{new_question_path(activity_id: @activity.id)}" New Question
     - if @activity.questions.empty?
       p There are currently no questions for this activity.
     - else
