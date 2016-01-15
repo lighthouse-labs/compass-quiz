@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    @question.activity_id = params[:activity_id] if params[:activity_id]
+    @question.activity_id = params[:activity_id]
     2.times { @question.options << Option.new }
   end
 

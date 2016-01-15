@@ -5,6 +5,7 @@ class QuizzesController < ApplicationController
   def index
     set_quizzes
     @quiz = Quiz.new
+    @quiz.cohort_id = params[:cohort_id]
   end
 
   def show

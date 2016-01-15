@@ -15,6 +15,7 @@
               tr
                 th width="100%" Activity
                 th
+                th
                   abbr title="Compass install" Install
                 th
                   abbr title="Compass primary key" PK
@@ -22,7 +23,8 @@
             tbody
               - @activities.each do |activity|
                 tr
-                  td = link_to "#{activity.day} #{activity.title}", activity
+                  td = link_to "#{activity.day} - #{activity.title}", activity
+                  td = link_to activity.questions.count, new_question_url(activity_id: activity.id), class: 'label label-primary', title: 'Questions | New Question'
                   td.text-nowrap = activity.compass_install
                   td = activity.compass_primary_key
                   td.text-right
