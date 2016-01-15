@@ -10,6 +10,20 @@
     - if @questions.empty?
       p There are currently no questions in the system.
     - else
-      .row
-        - in_n_pages(@questions, 2) do |questions|
-          .col-lg-6 = render partial: 'question', collection: questions
+      table.table
+        thead
+          tr
+            th Activity
+            th Question
+            th
+            th
+            th
+        - @questions.each do |question|
+          tr
+            td = link_to truncate(question.activity.title, length: 30), question.activity, title: question.activity.title
+            td = link_to truncate(question.question, length: 100), question, class: 'text-inherit'
+            td.text-right = link_to 'view', question
+            td.text-right = link_to 'edit', edit_question_path(question)
+            td.text-right
+              = link_to question, method: :delete, class: 'text-muted pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"} do
+                i.fa.fa-trash title="Delete"
