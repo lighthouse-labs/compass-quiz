@@ -27,4 +27,9 @@ module ApplicationHelper
       .map(&:upcase)
   end
 
+  def quiz_cohort_options
+    Cohort.all
+      .map { |cohort| [cohort.name, cohort.id] }
+  end
+
 end

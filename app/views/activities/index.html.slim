@@ -23,7 +23,7 @@
               - @activities.each do |activity|
                 tr
                   td = link_to "#{activity.day} #{activity.title}", activity
-                  td = activity.compass_install
+                  td.text-nowrap = activity.compass_install
                   td = activity.compass_primary_key
                   td.text-right
                     = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do

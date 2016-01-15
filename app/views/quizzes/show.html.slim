@@ -6,10 +6,8 @@
       li.active = @quiz.uuid
     .page-header
       h1
-        i = @quiz.cohort.compass_install.upcase
-        = ' '
-        b = @quiz.day
-        = " #{@quiz.cohort.name}"
+        b = 'Quiz: '
+        = "#{@quiz.day} - #{@quiz.cohort.name}"
       p = render partial: 'shared/header_timestamps', locals: {model: @quiz}
     p
       = 'Send the following link to students in the '

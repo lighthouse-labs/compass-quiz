@@ -8,5 +8,7 @@
     .page-header
       h1
         = 'Editing '
-        = link_to "Question #{@question.id}", question_path
+        = link_to question_path do
+          b = 'Question: '
+          = @question.id
     = render 'form'

@@ -23,7 +23,7 @@
               - @cohorts.each do |cohort|
                 tr
                   td = link_to cohort.name, cohort
-                  td = cohort.compass_install
+                  td.text-nowrap = cohort.compass_install
                   td = cohort.compass_primary_key
                   td.text-right
                     = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
