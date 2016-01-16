@@ -9,6 +9,7 @@ class QuizzesController < ApplicationController
   end
 
   def show
+    @submission_stats = @quiz.submissions.stats
   end
 
   def create
@@ -33,7 +34,7 @@ class QuizzesController < ApplicationController
   end
 
   def set_quizzes
-    @quizzes = Quiz.unscope(:order).order(created_at: :desc)
+    @quizzes = Quiz.order(created_at: :desc)
   end
 
   def quiz_params

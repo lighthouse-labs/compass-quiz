@@ -27,9 +27,10 @@ module ApplicationHelper
       .map(&:upcase)
   end
 
-  def quiz_cohort_options
-    Cohort.all
-      .map { |cohort| [cohort.name, cohort.id] }
+  def submission_score(submission)
+    correct = submission.answers.joins(:option).where(options: {correct: true}).count
+    questions = submission.quiz.questions.count
+    "#{correct} / #{questions}"
   end
 
 end

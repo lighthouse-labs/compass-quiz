@@ -8,6 +8,15 @@ class Submission < ActiveRecord::Base
 
   accepts_nested_attributes_for :answers
 
+  scope :stats, -> {
+    select('submissions.*', 'options.correct AS options_correct', 'COUNT(answers.id) AS answers_count')
+      .group('submissions.id', 'options.correct')
+      .joins(:quiz)
+      .joins('LEFT JOIN answers ON answers.submission_id = submissions.id')
+      .joins('LEFT JOIN options ON answers.option_id = options.id')
+      .order('submissions.created_at', 'options.correct')
+  }
+
   before_validation on: :create do
     unless uuid
       self.uuid = SecureRandom.uuid
@@ -18,25 +27,20 @@ class Submission < ActiveRecord::Base
     uuid
   end
 
-  def score
-    "#{correct} / #{quiz.questions_count}"
-  end
-
-  def percent
-    (correct.to_f / quiz.questions_count * 100).floor
-  end
-
-  def correct
-    @correct ||= answers.where(options: {correct: true}).count
-  end
-
   def option_selected?(option)
-    @option_selected_memo ||= {}
+    @memo ||= {}
     option_id = option.is_a?(Option) ? option.id : option
-    unless @option_selected_memo.has_key?(option_id)
-      @option_selected_memo[option_id] = answers.map(&:option_id).include?(option_id)
+    unless @memo.has_key?(option_id)
+      @memo[option_id] = answers.map(&:option_id).include?(option_id)
     end
-    @option_selected_memo[option_id]
+    @memo[option_id]
+  end
+
+  def self.average_correct
+    correct_answer_submissions = self.select(&:options_correct)
+    correct_submissions_count = [correct_answer_submissions.length, 1].max
+    correct_answer_sum = correct_answer_submissions.map(&:answers_count).reduce(0, &:+)
+    correct_answer_sum.to_f / correct_submissions_count.to_f
   end
 
 end

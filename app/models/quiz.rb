@@ -4,7 +4,7 @@ class Quiz < ActiveRecord::Base
 
   belongs_to :cohort
 
-  has_many :submissions, -> { includes(:student).joins(:student).order('students.github_username') }, dependent: :nullify
+  has_many :submissions, dependent: :nullify
 
   has_and_belongs_to_many :questions
 
@@ -33,26 +33,8 @@ class Quiz < ActiveRecord::Base
     end
   end
 
-  default_scope { joins(:cohort).order('cohorts.compass_install, cohorts.id, quizzes.day, quizzes.id') }
-
   def to_param
     uuid
-  end
-
-  def average_score
-    (submissions.map(&:correct).inject(&:+) / submissions_count.to_f).round(1)
-  end
-
-  def average_percent
-    (submissions.map(&:percent).inject(&:+) / submissions_count.to_f).floor
-  end
-
-  def questions_count
-    @questions_count ||= questions.count
-  end
-
-  def submissions_count
-    @submissions_count ||= submissions.count
   end
 
 end

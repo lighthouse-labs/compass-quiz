@@ -12,7 +12,7 @@
           | Result
           br
           span.label.label-primary
-            = @submission.score
+            = submission_score(@submission)
         hr
         - @submission.quiz.questions.each_with_index do |question, question_index|
           .submission-question

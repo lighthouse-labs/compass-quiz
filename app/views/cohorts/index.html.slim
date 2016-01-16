@@ -14,7 +14,7 @@
             thead
               tr
                 th width="100%" Cohort
-                th
+                th.text-right
                 th
                   abbr title="Compass install" Install
                 th
@@ -24,7 +24,7 @@
               - @cohorts.each do |cohort|
                 tr
                   td = link_to cohort.name, cohort
-                  td = link_to cohort.quizzes.count, quizzes_path(cohort_id: cohort.id), class: 'label label-primary', title: 'Quizzes | New Quiz'
+                  td.text-right = link_to cohort.quizzes.count, quizzes_path(cohort_id: cohort.id), class: 'label label-primary', title: 'Quizzes | New Quiz'
                   td.text-nowrap = cohort.compass_install
                   td = cohort.compass_primary_key
                   td.text-right

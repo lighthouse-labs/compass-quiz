@@ -10,6 +10,6 @@ class Cohort < ActiveRecord::Base
 
   validates :name, presence: true
 
-  default_scope { order(:compass_install, compass_primary_key: :desc) }
+  default_scope { order(:name) }
 
 end

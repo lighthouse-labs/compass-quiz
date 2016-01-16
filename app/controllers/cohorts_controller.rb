@@ -8,14 +8,7 @@ class CohortsController < ApplicationController
   end
 
   def show
-    @submission_stats = Submission
-      .select(:uuid, :student_id, :quiz_id, 'options.correct AS options_correct', 'COUNT(answers.id) AS answers_count')
-      .group(:id, 'options.correct')
-      .joins(:quiz)
-      .where(quizzes: { cohort_id: @cohort.id })
-      .joins('LEFT JOIN answers ON answers.submission_id = submissions.id')
-      .joins('LEFT JOIN options ON answers.option_id = options.id')
-      .order('options.correct')
+    @submission_stats = Submission.stats.where(quizzes: {cohort_id: @cohort.id})
   end
 
   def create
