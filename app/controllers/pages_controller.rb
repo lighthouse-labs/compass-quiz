@@ -2,10 +2,11 @@ class PagesController < ApplicationController
 
   def home
     @page = {
-      questions: model_stats(Question),
-      cohorts: model_stats(Cohort),
       activities: model_stats(Activity),
+      cohorts: model_stats(Cohort),
+      questions: model_stats(Question),
       quizzes: model_stats(Quiz),
+      students: model_stats(Student),
       users: model_stats(User)
     }
     @quiz = Quiz.new

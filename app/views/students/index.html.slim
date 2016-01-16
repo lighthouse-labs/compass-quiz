@@ -1,0 +1,14 @@
+.container
+  article.page-content
+    ol.breadcrumb
+      li = link_to 'Home', root_path
+      li.active Students
+    .page-header
+      h1 Students
+    - if @cohorts.empty?
+      p There are currently no students in the system.
+    - else
+      - @cohorts.each do |cohort|
+        h2 = cohort.name
+        - cohort.students.each do |student|
+          p = link_to student.github_username, student

@@ -47,8 +47,7 @@
           tbody
             - @cohort.students.each do |student|
               tr
-                td
-                  = student.github_username
+                td = link_to student.github_username, student
                 - @cohort.quizzes.each do |quiz|
                   td.text-center
                     - @submission_stats.select { |s| s.student_id == student.id && s.quiz_id == quiz.id }.group_by(&:id).each_value do |submissions|
