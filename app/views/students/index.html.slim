@@ -5,10 +5,24 @@
       li.active Students
     .page-header
       h1 Students
-    - if @cohorts.empty?
+    - if @students.empty?
       p There are currently no students in the system.
     - else
-      - @cohorts.each do |cohort|
-        h2 = cohort.name
-        - cohort.students.each do |student|
-          p = link_to student.github_username, student
+      .row
+        .col-md-6
+          table.table
+            thead
+              tr
+                th Student
+                th Cohort
+                th
+                th
+            tbody
+              - @students.each do |student|
+                tr
+                  td = link_to student.github_username, student
+                  td = link_to student.cohort.name, student.cohort
+                  td.text-right = link_to student.submissions_count, student, class: 'label label-primary'
+                  td.text-right
+                    = link_to student, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this student?'} do
+                      i.fa.fa-trash title="Delete"
