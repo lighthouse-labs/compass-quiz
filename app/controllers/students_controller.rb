@@ -6,7 +6,6 @@ class StudentsController < ApplicationController
     @students = Student.select('students.*', 'cohorts.*', 'COUNT(submissions.id) AS submissions_count')
       .joins(:cohort)
       .joins('LEFT JOIN submissions ON submissions.student_id = students.id')
-      .where('submissions.quiz_id IS NOT NULL')
       .group('students.id', 'cohorts.id')
       .order(:github_username)
   end
