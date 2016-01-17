@@ -21,7 +21,11 @@
             span.label.label-info active
           - else
             span.label.label-warning inactive
-          | .
+          = ' and has appeared in '
+          = link_to quizzes_path do
+            b = @question.quizzes.count
+            = ' quizzes'
+          = '.'
         hr
         dl
           dt Activity
@@ -41,6 +45,7 @@
               b.pull-left = "Option #{index + 1} "
               - if option.correct?
                 span.label.label-success correct answer
+              .small = "Selected #{option.answers.count} times"
             .panel-body
               = markdown(option.answer)
             .panel-footer
