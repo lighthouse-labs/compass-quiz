@@ -11,7 +11,7 @@
       p = render partial: 'shared/header_timestamps', locals: {model: @student}
     h2 Submissions
     - if @submission_stats.empty?
-      p There are currently no submissions for this quiz.
+      p There are currently no submissions by this student.
     - else
       .table-responsive
         table.table
