@@ -1,4 +1,4 @@
-= "Created "
+= 'created '
 time datetime="#{model.created_at.to_formatted_s(:iso)}" = "#{time_ago_in_words(model.created_at)} ago"
 - unless model.created_at == model.updated_at
   span.text-muted

@@ -1,0 +1,39 @@
+.container
+  .row
+    .col-md-8.col-md-push-2
+      article.page-content
+        .page-header
+          h1.text-center
+            i.fa.fa-compass
+            = ' Compass Quiz'
+        h2.text-center
+          b = 'Questions for: '
+          = params[:id].upcase
+          - if params[:compass_install]
+            br
+            small
+              b = 'Compass install: '
+              = params[:compass_install]
+        - if @questions.empty?
+          .submission-question
+            .row
+              .col-lg-8.col-lg-push-2
+                .alert.alert-info.text-center
+                  i.fa.fa-info-circle
+                  = " There are no questions for #{params[:id].upcase}."
+        - @questions.each_with_index do |question, question_index|
+          .submission-question
+            h2.text-primary = "Question ##{question_index + 1}"
+            p.small = render partial: 'shared/header_timestamps', locals: {model: question}
+            = markdown(question.question)
+            .submission-answer
+              h3.text-muted = "Question ##{question_index + 1} options"
+              .list-group
+                - question.options.each_with_index do |option, option_index|
+                  .list-group-item
+                    .list-group-item-heading
+                      b = "Option #{option_index + 1}"
+                      = ' | '
+                      small = render partial: 'shared/header_timestamps', locals: {model: option}
+                    .list-group-item-text
+                      = markdown(option.answer)
