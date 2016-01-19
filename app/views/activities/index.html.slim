@@ -26,7 +26,7 @@
                   td = link_to "#{activity.day} - #{activity.title}", activity
                   td.text-right = link_to activity.questions.count, new_question_url(activity_id: activity.id), class: 'label label-primary', title: 'Questions | New Question'
                   td.text-nowrap = activity.compass_install
-                  td = activity.compass_primary_key
+                  td.text-right = activity.compass_primary_key
                   td.text-right
                     = link_to activity, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{activity_title(activity)}\"?" } do
                       i.fa.fa-trash title="Delete"

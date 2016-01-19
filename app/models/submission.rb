@@ -11,7 +11,7 @@ class Submission < ActiveRecord::Base
   scope :stats, -> {
     select('submissions.*', 'options.correct AS options_correct', 'COUNT(answers.id) AS answers_count')
       .group('submissions.id', 'options.correct')
-      .joins(:quiz)
+      .joins('LEFT JOIN quizzes ON quizzes.id = submissions.quiz_id')
       .joins('LEFT JOIN answers ON answers.submission_id = submissions.id')
       .joins('LEFT JOIN options ON answers.option_id = options.id')
       .order('submissions.created_at', 'options.correct')
