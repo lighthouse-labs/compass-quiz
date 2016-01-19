@@ -34,7 +34,7 @@ class SubmissionsController < ApplicationController
 
   def destroy
     @submission.destroy
-    redirect_to @submission.quiz, notice: 'The submission was successfully destroyed.'
+    redirect_to @submission.try(:quiz) || @submission.try(:student) || root_url, notice: 'The submission was successfully destroyed.'
   end
 
   protected
