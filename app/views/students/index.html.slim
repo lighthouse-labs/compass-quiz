@@ -10,20 +10,21 @@
     - else
       .row
         .col-md-6
-          table.table
-            thead
-              tr
-                th width="50%" Student
-                th width="50%" Cohort
-                th
-                  abbr title="Compass primary key" PK
-                th
-            tbody
-              - @students.each do |student|
+          .table-responsive
+            table.table
+              thead
                 tr
-                  td = link_to student.github_username, student
-                  td.text-nowrap = link_to student.cohort.name, student.cohort
-                  td.text-right = student.compass_primary_key || '--'
-                  td.text-right
-                    = link_to student, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this student?'} do
-                      i.fa.fa-trash title="Delete"
+                  th width="50%" Student
+                  th width="50%" Cohort
+                  th
+                    abbr title="Compass primary key" PK
+                  th
+              tbody
+                - @students.each do |student|
+                  tr
+                    td = link_to student.github_username, student
+                    td.text-nowrap = link_to student.cohort.name, student.cohort
+                    td.text-right = student.compass_primary_key || '--'
+                    td.text-right
+                      = link_to student, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this student?'} do
+                        i.fa.fa-trash title="Delete"

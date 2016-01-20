@@ -10,26 +10,27 @@
         - if @cohorts.empty?
           p There are currently no cohorts in the system.
         - else
-          table.table
-            thead
-              tr
-                th width="100%" Cohort
-                th.text-right
-                th
-                  abbr title="Compass install" Install
-                th
-                  abbr title="Compass primary key" PK
-                th
-            tbody
-              - @cohorts.each do |cohort|
+          .table-responsive
+            table.table
+              thead
                 tr
-                  td = link_to cohort.name, cohort
-                  td.text-right = link_to cohort.quizzes.count, quizzes_path(cohort_id: cohort.id), class: 'label label-primary', title: 'Quizzes | New Quiz'
-                  td.text-nowrap = cohort.compass_install
-                  td.text-right = cohort.compass_primary_key
-                  td.text-right
-                    = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
-                      i.fa.fa-trash title="Delete"
+                  th width="100%" Cohort
+                  th.text-right
+                  th
+                    abbr title="Compass install" Install
+                  th
+                    abbr title="Compass primary key" PK
+                  th
+              tbody
+                - @cohorts.each do |cohort|
+                  tr
+                    td = link_to cohort.name, cohort
+                    td.text-right = link_to cohort.quizzes.count, quizzes_path(cohort_id: cohort.id), class: 'label label-primary', title: 'Quizzes | New Quiz'
+                    td.text-nowrap = cohort.compass_install
+                    td.text-right = cohort.compass_primary_key
+                    td.text-right
+                      = link_to cohort, method: :delete, class: 'text-muted pull-right', data: { confirm: "Are you sure you want to delete \"#{cohort_name(cohort)}\"?" } do
+                        i.fa.fa-trash title="Delete"
       .col-md-6
         = form_for @cohort, html: { class: 'form-horizontal' } do |f|
           .panel.panel-primary

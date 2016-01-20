@@ -10,19 +10,20 @@
         - if @quizzes.empty?
           p There are currently no quizzes in the system.
         - else
-          table.table
-            thead
-              tr
-                th width="100%" Quiz
-                th.text-right
-                th
-            tbody
-              - @quizzes.each do |quiz|
+          .table-responsive
+            table.table
+              thead
                 tr
-                  td = link_to "#{quiz.day} - #{quiz.cohort.name}", quiz
-                  td.text-right = link_to quiz.submissions.count, new_quiz_submission_url(quiz), class: 'label label-primary', title: 'Submissions | New Submission'
-                  td.text-right
-                    = link_to quiz, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this quiz?'} do
-                      i.fa.fa-trash title="Delete"
+                  th width="100%" Quiz
+                  th.text-right
+                  th
+              tbody
+                - @quizzes.each do |quiz|
+                  tr
+                    td = link_to "#{quiz.day} - #{quiz.cohort.name}", quiz
+                    td.text-right = link_to quiz.submissions.count, new_quiz_submission_url(quiz), class: 'label label-primary', title: 'Submissions | New Submission'
+                    td.text-right
+                      = link_to quiz, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this quiz?'} do
+                        i.fa.fa-trash title="Delete"
       .col-md-6
         = render partial: 'form'

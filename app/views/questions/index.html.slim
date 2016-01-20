@@ -10,20 +10,21 @@
     - if @questions.empty?
       p There are currently no questions in the system.
     - else
-      table.table
-        thead
-          tr
-            th Activity
-            th Question
-            th
-            th
-            th
-        - @questions.each do |question|
-          tr
-            td = link_to truncate(question.activity.title, length: 30), question.activity, title: question.activity.title
-            td = link_to truncate(question.question, length: 100), question, class: 'text-inherit'
-            td.text-right = link_to 'view', question
-            td.text-right = link_to 'edit', edit_question_path(question)
-            td.text-right
-              = link_to question, method: :delete, class: 'text-muted pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"} do
-                i.fa.fa-trash title="Delete"
+      .table-responsive
+        table.table
+          thead
+            tr
+              th Activity
+              th Question
+              th
+              th
+              th
+          - @questions.each do |question|
+            tr
+              td = link_to truncate(question.activity.title, length: 30), question.activity, title: question.activity.title
+              td = link_to truncate(question.question, length: 100), question, class: 'text-inherit'
+              td.text-right = link_to 'view', question
+              td.text-right = link_to 'edit', edit_question_path(question)
+              td.text-right
+                = link_to question, method: :delete, class: 'text-muted pull-right', data: {confirm: "Are you sure you want to delete question #{question.id}?"} do
+                  i.fa.fa-trash title="Delete"

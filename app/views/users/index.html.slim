@@ -10,19 +10,20 @@
         - if @users.empty?
           p There are currently no users in the system.
         - else
-          table.table
-            thead
-              tr
-                th Name
-                th Email
-                th
-            tbody
-              - @users.each do |user|
+          .table-responsive
+            table.table
+              thead
                 tr
-                  td = user.name
-                  td = user.email
-                  td.text-right = link_to user, method: :delete, class: 'text-muted', data: {confirm: "Are you sure you want to delete user #{user.id}?"} do
-                    i.fa.fa-trash title="Delete"
+                  th Name
+                  th Email
+                  th
+              tbody
+                - @users.each do |user|
+                  tr
+                    td = user.name
+                    td = user.email
+                    td.text-right = link_to user, method: :delete, class: 'text-muted', data: {confirm: "Are you sure you want to delete user #{user.id}?"} do
+                      i.fa.fa-trash title="Delete"
       .col-md-6
         = form_for @user, html: {class: 'form-horizontal'} do |f|
           .panel.panel-primary

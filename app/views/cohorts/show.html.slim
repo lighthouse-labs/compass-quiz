@@ -51,4 +51,4 @@
                 - @cohort.quizzes.each do |quiz|
                   td.text-center
                     - @submission_stats.select { |s| s.student_id == student.id && s.quiz_id == quiz.id }.group_by(&:id).each_value do |submissions|
-                      = link_to render(partial: 'submissions/stats_score', locals: {submissions: submissions}), submissions.first, class: 'text-inherit'
+                      .submission = link_to render(partial: 'submissions/stats_score', locals: {submissions: submissions}), submissions.first, class: 'text-inherit'
