@@ -3,6 +3,12 @@
 App for managing question banks and delivering quizzes to Lighthouse 
 Labs students.
 
+## Running the tests
+
+Tests use RSpec and are configured to run using `bin/rspec` or
+[Guard](https://github.com/guard/guard#readme). Run `guard` during
+development to watch files and run tests automatically.
+
 ## Contributing
 
 Submit pull requests to 
