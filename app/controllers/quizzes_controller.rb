@@ -10,6 +10,7 @@ class QuizzesController < ApplicationController
 
   def show
     @submission_stats = @quiz.submissions.stats
+    @question_stats = @quiz.questions.stats(@quiz)
   end
 
   def create
