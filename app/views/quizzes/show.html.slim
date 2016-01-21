@@ -3,7 +3,7 @@
     ol.breadcrumb
       li = link_to 'Home', root_path
       li = link_to 'Quizzes', quizzes_path
-      li.active = @quiz.uuid
+      li.active = "#{@quiz.day} - #{@quiz.cohort.name}"
     .page-header
       h1
         b = 'Quiz: '

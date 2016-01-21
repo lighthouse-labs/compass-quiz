@@ -28,3 +28,15 @@
                     td.text-right
                       = link_to student, method: :delete, class: 'text-muted pull-right', data: {confirm: 'Are you sure you want to delete this student?'} do
                         i.fa.fa-trash title="Delete"
+        .col-md-6
+          = form_tag merge_students_path do
+            .panel.panel-primary
+              .panel-heading Merge students
+              .panel-body.form-horizontal
+                .form-group
+                  = label_tag 'student_from[id]', 'Merge', class: 'control-label col-sm-3'
+                  .col-sm-9 = collection_select(:student_from, :id, Student.all, :id, :github_username, {prompt: true}, {class: 'form-control'})
+                .form-group
+                  = label_tag 'student_to[id]', 'Into', class: 'control-label col-sm-3'
+                  .col-sm-9 = collection_select(:student_to, :id, Student.all, :id, :github_username, {prompt: true}, {class: 'form-control'})
+              .panel-footer.clearfix = submit_tag 'Merge', class: 'btn btn-primary pull-right'

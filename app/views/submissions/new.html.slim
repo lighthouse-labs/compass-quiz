@@ -16,7 +16,7 @@
             .form-group
               = label_tag 'student[github_username]', 'GitHub Username', class: 'control-label col-sm-4'
               .col-sm-8
-                = text_field_tag 'student[github_username]', nil, class: 'form-control'
+                = text_field_tag 'student[github_username]', nil, class: 'form-control', autocomplete: 'off'
                 p
                   small Enter your GitHub username to associate this quiz with your account.
           - @submission.quiz.questions.each_with_index do |question, question_index|

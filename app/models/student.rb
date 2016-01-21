@@ -6,4 +6,6 @@ class Student < ActiveRecord::Base
 
   validates :github_username, presence: true
 
+  default_scope { order(:github_username) }
+
 end
