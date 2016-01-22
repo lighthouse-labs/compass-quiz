@@ -16,11 +16,17 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
 require "capybara/rspec"
-
+require 'database_cleaner'
 
 RSpec.configure do |config|
+
+  # include gem Capybara
+  config.include Capybara::DSL
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -44,7 +50,12 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-# The settings below are suggested to provide a good initial experience
+  config.use_transactional_fixtures = true
+  DatabaseCleaner.strategy = :truncation
+
+  config.filter_run :focus => true
+
+  # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
   # These two settings work together to allow you to limit a spec run
@@ -86,7 +97,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = :random
-
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
   # test failures related to randomization by passing the same `--seed` value
