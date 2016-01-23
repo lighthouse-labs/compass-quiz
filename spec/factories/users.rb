@@ -1,9 +1,9 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :user do |u|
-    u.name 'admin'
-    u.email 'admin@example.com'
-    u.password 'admin'
+  factory :user do
+    name 'admin'
+    email 'admin@example.com'
+    password 'admin'
   end
 end
