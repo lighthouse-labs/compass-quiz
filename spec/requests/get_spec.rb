@@ -1,11 +1,11 @@
 require 'rails_helper'
 require 'pry'
-describe 'Get request ',:type => :request, :focus => true  do
+describe 'Get request ',type: :request, focus: true  do
   before :each do
     @user = FactoryGirl.create(:user)
     visit '/'
-    fill_in 'email', :with => 'admin@example.com'
-    fill_in 'password', :with => 'admin'
+    fill_in 'email', with: 'admin@example.com'
+    fill_in 'password', with: 'admin'
     click_button "Sign In"
   end
   describe 'session' do
@@ -16,7 +16,7 @@ describe 'Get request ',:type => :request, :focus => true  do
   end
 
   describe 'home page' do
-    it 'shoul get 200 status code in homepage' do
+    it 'should get 200 status code in homepage' do
       visit '/'
       expect(page.status_code).to eq(200)
     end
