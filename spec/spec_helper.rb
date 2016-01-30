@@ -21,6 +21,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require "capybara/rspec"
 require 'database_cleaner'
+require 'pry'
 
 RSpec.configure do |config|
 
