@@ -43,15 +43,14 @@ describe 'Get request ',:type => :request, :focus => true  do
     end
     it 'should get 200 status code in show the cohort' do
       @cohort = FactoryGirl.create(:cohort)
-      visit '/cohorts'
-      click_link ('The cohort')
+      visit "/cohorts/#{@cohort.id}"
       expect(page.status_code).to eq(200)
     end
   end
 
   describe 'Questions' do
     it 'should get 200 status code in questions index' do
-      click_link('Questions')
+      visit '/questions'
       expect(page.status_code).to eq(200)
     end
     it 'should get 200 status code in show the question' do
@@ -84,15 +83,21 @@ describe 'Get request ',:type => :request, :focus => true  do
 
   describe 'Students' do
     it 'should get 200 status code in students index' do
-      # @cohort = FactoryGirl.create(:cohort, :cohort_with_students)
-      click_link('Students')
+      visit '/students'
       expect(page.status_code).to eq(200)
     end
+    it 'should get 200 status code in show the student page' do
+    #TODO create a student object
+    end
+  end
+
+  describe 'submission' do
+    #TODO create submission object
   end
 
   describe 'Users' do
     it 'should get 200 status code in users index' do
-      click_link('Users')
+      visit '/users'
       expect(page.status_code).to eq(200)
     end
   end
