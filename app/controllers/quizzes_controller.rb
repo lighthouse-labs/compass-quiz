@@ -15,6 +15,7 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = Quiz.new(quiz_params)
+    set_created_by(@quiz)
     if @quiz.save
       redirect_to @quiz, notice: "Quiz #{@quiz.uuid} was successfully created."
     else

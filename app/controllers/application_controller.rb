@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_path unless current_user
   end
 
+  def set_created_by(model)
+    model.created_by = current_user
+  end
+
 end

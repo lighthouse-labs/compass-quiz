@@ -1,5 +1,7 @@
 class Activity < ActiveRecord::Base
 
+  include CreatorTrackable
+
   has_many :questions, dependent: :nullify
 
   validates :compass_install, presence: true

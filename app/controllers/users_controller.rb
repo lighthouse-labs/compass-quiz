@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    set_created_by(@user)
     password = SecureRandom.urlsafe_base64(16)
     @user.password = password
     if @user.save

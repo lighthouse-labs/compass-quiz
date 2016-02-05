@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108190818) do
+ActiveRecord::Schema.define(version: 20160205163659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160108190818) do
     t.datetime "updated_at",          null: false
     t.string   "compass_install"
     t.integer  "compass_primary_key"
+    t.integer  "created_by_user_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160108190818) do
     t.datetime "updated_at",          null: false
     t.string   "compass_install"
     t.integer  "compass_primary_key"
+    t.integer  "created_by_user_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -56,10 +58,11 @@ ActiveRecord::Schema.define(version: 20160108190818) do
 
   create_table "questions", force: :cascade do |t|
     t.text     "question"
-    t.boolean  "active",      default: true
+    t.boolean  "active",             default: true
     t.integer  "activity_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "created_by_user_id"
   end
 
   add_index "questions", ["activity_id"], name: "index_questions_on_activity_id", using: :btree
@@ -77,9 +80,10 @@ ActiveRecord::Schema.define(version: 20160108190818) do
   create_table "quizzes", force: :cascade do |t|
     t.string   "day"
     t.integer  "cohort_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "uuid"
+    t.integer  "created_by_user_id"
   end
 
   add_index "quizzes", ["cohort_id"], name: "index_quizzes_on_cohort_id", using: :btree
@@ -109,8 +113,9 @@ ActiveRecord::Schema.define(version: 20160108190818) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "created_by_user_id"
   end
 
   add_foreign_key "answers", "options"

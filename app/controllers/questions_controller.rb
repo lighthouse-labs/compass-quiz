@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    set_created_by(@question)
     if @question.save
       redirect_to @question, notice: "Question #{@question.id} was successfully created."
     else

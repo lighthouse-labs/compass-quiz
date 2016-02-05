@@ -1,5 +1,7 @@
 class Cohort < ActiveRecord::Base
 
+  include CreatorTrackable
+
   has_many :students, -> { order('students.github_username') }, dependent: :nullify
 
   has_many :quizzes, -> { unscoped.order('quizzes.created_at') }, dependent: :nullify

@@ -1,5 +1,7 @@
 class Question < ActiveRecord::Base
 
+  include CreatorTrackable
+
   belongs_to :activity
 
   has_many :options, dependent: :destroy

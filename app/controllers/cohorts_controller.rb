@@ -13,6 +13,7 @@ class CohortsController < ApplicationController
 
   def create
     @cohort = Cohort.new(cohort_params)
+    set_created_by(@cohort)
     if @cohort.save
       redirect_to cohorts_url, notice: "#{cohort_name(@cohort)} was successfully created."
     else

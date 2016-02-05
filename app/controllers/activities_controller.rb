@@ -12,6 +12,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
+    set_created_by(@activity)
     if @activity.save
       redirect_to activities_url, notice: "#{activity_title(@activity)} was successfully created."
     else

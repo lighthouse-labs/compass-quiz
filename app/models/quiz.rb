@@ -1,5 +1,7 @@
 class Quiz < ActiveRecord::Base
 
+  include CreatorTrackable
+
   QUESTIONS_PER_QUIZ = 5
 
   belongs_to :cohort
